@@ -1,0 +1,84 @@
+@mixin push-generate($space) {
+  margin-bottom: $space !important;
+
+  &-t {
+    margin-top: $space !important;
+  }
+
+  &-r {
+    margin-right: $space !important;
+  }
+
+  &-l {
+    margin-left: $space !important;
+  }
+}
+
+@mixin box-shadow($shadow) {
+  -webkit-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
+
+@mixin clearfix() {
+
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+
+// Transitions
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  transition: $transition;
+}
+
+// Layout
+@mixin content-layout($x, $y, $overflow) {
+  margin: 0 auto;
+  padding: $y $x $y;
+  max-width: 100%;
+  overflow-x: $overflow;
+
+  p,
+  .push,
+  .block,
+  .items-push>div {
+    margin-bottom: $y;
+  }
+
+  .items-push-2x>div {
+    margin-bottom: ($y*2);
+  }
+
+  .items-push-3x>div {
+    margin-bottom: ($y*3);
+  }
+
+  &-full {
+    padding-bottom: $y;
+
+    .pull-b {
+      margin-bottom: -$y;
+    }
+  }
+
+  .pull-t {
+    margin-top: -$y;
+  }
+
+  .pull-r-l {
+    margin-right: -$x;
+    margin-left: -$x;
+  }
+
+  .pull-b {
+    margin-bottom: -1px;
+  }
+}
