@@ -159,7 +159,7 @@ div#cursorsThumbnail {
 
 /*OVERWRITING REVEAL.JS STYLES*/
 .reveal {
-  font-size: 28px;
+  font-size: 38px;
   padding-top: 60px;
   padding-bottom: 60px; }
 
@@ -276,14 +276,14 @@ canvas.border-frame {
     .reveal .slides .block-header:after {
       clear: both; }
   .reveal .slides .block-title {
-    font-size: 29px;
+    font-size: 39px;
     font-weight: 600;
     text-transform: uppercase;
     line-height: 1.2; }
     .reveal .slides .block-title.text-normal {
       text-transform: none; }
     .reveal .slides .block-title small {
-      font-size: 27px;
+      font-size: 37px;
       font-weight: normal;
       text-transform: none; }
   .reveal .slides .block-content {
