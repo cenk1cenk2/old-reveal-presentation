@@ -19,12 +19,14 @@ module.exports = grunt => {
         ' */'
     },
 
+    // uglify: {
+    // },
+
     terser: {
       options: { ecma: 2015 },
       main: {
         files: [
-          { src: 'js/reveal.js', dest: 'js/reveal.min.js' },
-          { src: 'js/app.js', dest: 'js/app.min.js' }
+          { src: ['js/lib/*.js', 'js/jquery.min.js', 'js/include.js', 'js/reveal.js', 'js/app.js'], dest: 'dist/js/base.min.js' },
         ]
       }
     },
@@ -34,17 +36,18 @@ module.exports = grunt => {
         implementation: sass,
         sourceMap: false
       },
-      core: {
-        files: [
-          { src: 'css/reveal.scss', dest: 'css/reveal.css' },
-          { src: 'css/style.scss', dest: 'css/style.css' }
-        ]
-      },
-      themes: {
+      base: {
         expand: true,
-        cwd: 'css/theme/source',
+        cwd: 'css/theme/base/source',
         src: ['*.sass', '*.scss'],
-        dest: 'css/theme',
+        dest: 'dist/css/base',
+        ext: '.css'
+      },
+      extend: {
+        expand: true,
+        cwd: 'css/theme/extend/source',
+        src: ['*.sass', '*.scss'],
+        dest: 'dist/css/extend',
         ext: '.css'
       }
     },
@@ -53,12 +56,67 @@ module.exports = grunt => {
       options: {
         compatibility: 'ie9'
       },
-      compress: {
+      css: {
+        files: [{
+          expand: true,
+          flatten: true,
+          cwd: 'css',
+          src: ['*.css', '!*.min.css'],
+          dest: 'dist/css',
+          ext: '.min.css'
+        }],
+        print: [{
+          expand: true,
+          flatten: true,
+          cwd: 'css/print',
+          src: ['*.css', '!*.min.css'],
+          dest: 'dist/css',
+          ext: '.min.css'
+        }]
+      },
+      fonts: {
         files: [
-          { src: 'css/reveal.css', dest: 'css/reveal.min.css' },
-          { src: 'css/style.css', dest: 'css/style.min.css' }
+          { src: 'fonts/hero-fontface/fonts.css', dest: 'dist/css/fonts/hero-fontface.min.css' },
+          { src: 'fonts/roboto-fontface/roboto-fontface.css', dest: 'dist/css/fonts/roboto-fontface.min.css' }
+        ]
+      },
+      scss: {
+        files: [
+          { src: 'dist/css/base/black.css', dest: 'dist/css/black.min.css' },
+          { src: 'dist/css/extend/extend.css', dest: 'dist/css/extend.min.css' }
         ]
       }
+    },
+
+    copy: {
+      fonts: {
+        expand: true,
+        flatten: true,
+        cwd: 'fonts',
+        src: '**',
+        dest: 'dist/css/fonts',
+        filter: 'isFile'
+      },
+      images: {
+        expand: true,
+        flatten: true,
+        cwd: 'css/img',
+        src: '**',
+        dest: 'dist/css/img',
+        filter: 'isFile'
+      },
+      plugins: {
+        expand: true,
+        flatten: false,
+        cwd: 'js/plugins',
+        src: '**',
+        dest: 'dist/js/plugins',
+        filter: 'isFile'
+      }
+    },
+
+    clean: {
+      scss: ['dist/css/base', 'dist/css/extend']
     },
 
     connect: {
@@ -77,46 +135,39 @@ module.exports = grunt => {
     zip: {
       bundle: {
         src: [
-          'index.html',
+          'dist/**',
           'slides/**',
-          'css/*.min.css',
-          'css/reset.css',
-          'css/theme/*.css',
-          'css/print/*.css',
-          'js/**',
-          'lib/**',
-          'img/**',
-          'fonts/**',
-          'assets/**',
-          'favicon.png'
+          'template/**',
+          '.gitignore',
+          'favicon.png',
+          'gruntfile.js',
+          'index.html',
+          'package.json',
         ],
-        dest: 'dist/cenkkilic-dist-presentation.zip'
+        dest: 'bundle.zip'
       }
     },
 
     watch: {
       js: {
-        files: ['gruntfile.js', 'js/reveal.js', 'js/app.js'],
+        files: ['gruntfile.js', 'js/**/*.js', 'slides/js/**/*.js'],
         tasks: 'js'
       },
-      theme: {
+      scss: {
         files: [
-          'css/theme/source/*.sass',
-          'css/theme/source/*.scss',
-          'css/theme/template/*.sass',
-          'css/theme/template/*.scss'
+          'css/theme/**/*.scss',
         ],
-        tasks: 'css-themes'
+        tasks: 'scss'
       },
       css: {
-        files: ['css/reveal.scss', 'css/style.scss', 'css/variables.scss', 'css/mixins.scss'],
-        tasks: 'css-core'
+        files: ['css/**/*.css'],
+        tasks: 'css'
       },
       html: {
-        files: [root.map(path => path + '/*.html'), root.map(path => path + '/slides/*.html')]
+        files: [root.map(path => path + '/*.html'), root.map(path => path + '/template/*.html'), root.map(path => path + '/slides/*.html')]
       },
       markdown: {
-        files: root.map(path => path + '/*.md')
+        files: root.map(path => path + '/slides/*.md')
       },
       options: {
         livereload: true,
@@ -132,26 +183,30 @@ module.exports = grunt => {
   grunt.loadNpmTasks('grunt-contrib-watch')
   grunt.loadNpmTasks('grunt-sass')
   grunt.loadNpmTasks('grunt-zip')
+  grunt.loadNpmTasks('grunt-contrib-uglify-es')
   grunt.loadNpmTasks('grunt-terser')
+  grunt.loadNpmTasks('grunt-contrib-clean')
+  grunt.loadNpmTasks('grunt-contrib-copy')
 
   // Default task
-  grunt.registerTask('default', ['css', 'js'])
+  grunt.registerTask('default', ['js', 'scss', 'css', 'fonts', 'assets'])
 
   // JS task
   grunt.registerTask('js', ['terser'])
 
+  // Fonts
+  grunt.registerTask('fonts', ['cssmin:fonts', 'copy:fonts'])
+
+  // Assets
+  grunt.registerTask('assets', ['copy:images', 'copy:plugins'])
+
   // Theme CSS
-  grunt.registerTask('css-themes', ['sass:themes'])
-
-  // Core framework CSS
-  grunt.registerTask('css-core', ['sass:core', 'cssmin'])
-
-  // All CSS
-  grunt.registerTask('css', ['sass', 'cssmin'])
+  grunt.registerTask('scss', ['sass', 'cssmin:scss', 'clean:scss'])
+  grunt.registerTask('css', ['cssmin:css'])
 
   // Package presentation to archive
   grunt.registerTask('package', ['default', 'zip'])
 
   // Serve presentation locally
-  grunt.registerTask('serve', ['connect', 'watch'])
+  grunt.registerTask('serve', ['default', 'connect', 'watch'])
 }

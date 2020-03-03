@@ -4,57 +4,29 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Cenk Kılıç - MTI Thesis - fullctrl</title>
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/reveal.min.css" />
-    <link rel="stylesheet" href="css/theme/black.css" />
-    <link rel="stylesheet" href="fonts/fonts.css" />
-    <link rel="stylesheet" href="fonts/roboto-fontface/css/roboto/roboto-fontface.css" />
-    <link rel="stylesheet" href="css/style.min.css" />
-    <link rel="stylesheet" href="lib/css/monokai.css" />
+    <link rel="stylesheet" href="dist/css/reset.min.css" />
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="dist/css/black.min.css" />
+    <link rel="stylesheet" href="dist/css/extend.min.css" />
+    <link rel="stylesheet" href="dist/css/monokai.min.css" />
+    <link rel="stylesheet" href="dist/css/fonts/hero-fontface.min.css" />
+    <link rel="stylesheet" href="dist/css/fonts/roboto-fontface.min.css" />
     <link rel="icon" type="image/x-icon" href="favicon.png" />
-    <!-- Global Variables for Scripts -->
-    <script>
-      window.GAUGES_NO_AUTO_INIT = true
-    </script>
-    <!-- END Global Variables for Scripts -->
   </head>
   <body>
-    <!-- Background Image Filter -->
-    <div id="backgroundImg"></div>
-    <!-- END Background Image Filter -->
-
-    <!-- Header -->
-    <div id="header">
-      <div class="img-container">
-        <img src="img/logo.svg" class="logo" />
-      </div>
-      <div class="project-name">
-        <a href="#">fullctrl</a>
-      </div>
-      <div class="contactMe">
-        <a class="btn" href="https://cenk.kilic.dev/">Cenk Kılıç</a>
-      </div>
-    </div>
-    <!-- END Header -->
-    <!-- Footer -->
-    <div id="footer">
-      <div class="row">
-        <div class="img-container">
-          <img src="img/technikum-wien-logo.png" alt="" />
-        </div>
-        <div>
-          <p><strong>FH Technikum Wien</strong></p>
-          <p>Telecommunication and Internet Technologies Master Program</p>
-          <p>WS2019 - Thesis</p>
-        </div>
-      </div>
-    </div>
-    <!-- END Footer -->
+    <span include-html="template/template.html"></span>
+    <!-- Javascript Sources -->
+    <script src="dist/js/base.min.js"></script>
+    <!-- END Javascript Extras -->
     <div class="reveal">
-      <!-- Slides -->
       <div class="slides">
-        <section class="landing text-left" slide-name-data="Landing Page" data-external="slides/0-landing.html" data-background-video="assets/landing/login.mp4" data-background-video-loop="true" data-background-video-muted="true" data-background-opacity="0.6"></section>
+        <!-- Slides -->
+        <!-- Global Variables for Scripts -->
+        <script>
+          window.GAUGES_NO_AUTO_INIT = true
+        </script>
+        <!-- END Global Variables for Scripts -->
+        <section class="landing text-left" slide-name-data="Landing Page" data-external="slides/0-landing.html" data-background-video="slides/assets/landing/login.mp4" data-background-video-loop="true" data-background-video-muted="true" data-background-opacity="0.6"></section>
         <section slide-name-data="IOT Trends Today" data-external="slides/iot-trends.html"></section>
         <section slide-name-data="Server Management Trends Today" data-external="slides/server-management-trends.html"></section>
         <section slide-name-data="Open Source Quote" data-external="slides/open-source.html"></section>
@@ -64,28 +36,13 @@
         <section slide-name-data="Consistent Design" data-external="slides/consistent-design.html"></section>
         <section slide-name-data="Ease-of-Use" data-external="slides/ease-of-use.html"></section>
         <section slide-name-data="Modularity" data-external="slides/modularity.html"></section>
-        <section slide-name-data="End" data-external="slides/100-end.html" data-background-video="assets/end/logout.mp4" data-background-video-muted="true" data-background-opacity="0.6"></section>
+        <section slide-name-data="End" data-external="slides/100-end.html" data-background-video="slides/assets/end/logout.mp4" data-background-video-muted="true" data-background-opacity="0.6"></section>
+        <!-- Javascript Extras -->
+        <script src="slides/js/gauge.min.js"></script>
+        <script src="slides/js/gauge.extend.js"></script>
+        <!-- Can be found @ https://github.com/Mikhus/canvas-gauges -->
+        <!-- END Slides -->
       </div>
-      <!-- END Slides -->
     </div>
-    <!-- Custom Timeline for selection slides -->
-    <div id="timeline">
-      <ul></ul>
-    </div>
-    <div id="cursorsThumbnail" onclick="Reveal.toggleOverview()"></div>
-    <div id="pointTT">
-      <p class="name"></p>
-    </div>
-    <!-- END Custom Timeline for selection slides -->
-    <!-- Javascript Sources -->
-    <script src="js/extend/jquery.min.js"></script>
-    <script src="js/reveal.min.js"></script>
-    <script src="js/app.min.js"></script>
-    <!-- END Javascript Sources -->
-    <!-- Javascript Extras -->
-    <script src="js/extras/gauge.min.js"></script>
-    <script src="js/extras/gauge.extend.js"></script>
-    <!-- Can be found @ https://github.com/Mikhus/canvas-gauges -->
-    <!-- END Javascript Extras -->
   </body>
 </html>

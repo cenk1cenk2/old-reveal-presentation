@@ -2,6 +2,8 @@
 *.iml
 *.iws
 *.eml
+dist/
+bundle.zip
 out/
 .DS_Store
 .svn
