@@ -276,7 +276,9 @@ canvas {
 .reveal .slides {
   // Source
   .from-source {
-    text-align: right;
+    position: relative;
+    bottom: -40px;
+    text-align: left;
     color: #808080;
     font-size: 0.4em;
     font-family: 'Roboto';
