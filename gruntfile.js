@@ -142,6 +142,7 @@ module.exports = grunt => {
           '.gitignore',
           'favicon.png',
           'gruntfile.js',
+          'README.md',
           'index.html',
           'package.json'
         ],
