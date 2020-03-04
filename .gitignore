@@ -17,3 +17,4 @@ package-lock.json
 yarn.lock
 *.psd
 assets_source/
+yarn-error.log
