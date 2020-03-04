@@ -16,33 +16,11 @@
   <body>
     <span include-html="template/template.html"></span>
     <!-- Javascript Sources -->
-    <script src="dist/js/base.min.js"></script>
+    <script defer src="dist/js/include.min.js"></script>
+    <script async src="dist/js/base.min.js"></script>
     <!-- END Javascript Extras -->
     <div class="reveal">
-      <div class="slides">
-        <!-- Slides -->
-        <!-- Global Variables for Scripts -->
-        <script>
-          window.GAUGES_NO_AUTO_INIT = true
-        </script>
-        <!-- END Global Variables for Scripts -->
-        <section class="landing text-left" slide-name-data="Landing Page" data-external="slides/0-landing.html" data-background-video="slides/assets/landing/login.mp4" data-background-video-loop="true" data-background-video-muted="true" data-background-opacity="0.6"></section>
-        <section slide-name-data="IOT Trends Today" data-external="slides/iot-trends.html"></section>
-        <section slide-name-data="Server Management Trends Today" data-external="slides/server-management-trends.html"></section>
-        <section slide-name-data="Open Source Quote" data-external="slides/open-source.html"></section>
-        <section slide-name-data="Aims of the Project" data-external="slides/aims-of-project.html"></section>
-        <section slide-name-data="Responsive Design" data-external="slides/responsive-design.html"></section>
-        <section slide-name-data="Unresponsive Design" data-external="slides/responsive-design2.html"></section>
-        <section slide-name-data="Consistent Design" data-external="slides/consistent-design.html"></section>
-        <section slide-name-data="Ease-of-Use" data-external="slides/ease-of-use.html"></section>
-        <section slide-name-data="Modularity" data-external="slides/modularity.html"></section>
-        <section slide-name-data="End" data-external="slides/100-end.html" data-background-video="slides/assets/end/logout.mp4" data-background-video-muted="true" data-background-opacity="0.6"></section>
-        <!-- Javascript Extras -->
-        <script src="slides/js/gauge.min.js"></script>
-        <script src="slides/js/gauge.extend.js"></script>
-        <!-- Can be found @ https://github.com/Mikhus/canvas-gauges -->
-        <!-- END Slides -->
-      </div>
+      <div class="slides" include-html="slides/00-include.html"></div>
     </div>
   </body>
 </html>

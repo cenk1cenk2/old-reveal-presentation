@@ -1,25 +1,38 @@
 {
-  "name": "reveal.js",
-  "version": "3.8.0",
+  "name": "@cenk1cenk2/presentation",
+  "version": "1.1.0",
   "description": "The HTML Presentation Framework",
-  "homepage": "http://revealjs.com",
-  "subdomain": "revealjs",
-  "main": "js/reveal.js",
+  "author": {
+    "name": "Cenk Kilic",
+    "email": "cenk@kilic.dev",
+    "web": "http://kilic.dev"
+  },
+  "repository": "https://github.com/cenk1cenk2/presentation-mti",
+  "bin": "./node_modules/http-server/bin/http-server",
   "scripts": {
     "start": "grunt serve",
-    "build": "grunt"
+    "build": "grunt",
+    "serve": "http-server",
+    "pkg": "yarn && yarn build && rm -r node_modules && yarn --production && pkg . && yarn"
   },
-  "author": {
-    "name": "Hakim El Hattab",
-    "email": "hakim.elhattab@gmail.com",
-    "web": "http://hakim.se"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/hakimel/reveal.js.git"
+  "pkg": {
+    "scripts": [],
+    "assets": [
+      "./node_modules/**",
+      "./dist/**",
+      "./slides/**",
+      "./template/**",
+      "./favicon.png",
+      "./index.html"
+    ],
+    "targets": [
+      "node12-linux-x64",
+      "node12-windows-x64"
+    ],
+    "out-dir": "dist/"
   },
   "engines": {
-    "node": ">=9.0.0"
+    "node": ">=10.0.0"
   },
   "devDependencies": {
     "express": "^4.16.2",
@@ -41,7 +54,11 @@
     "load-grunt-tasks": "^4.0.0",
     "mustache": "^2.3.0",
     "node-sass": "^4.11.0",
+    "pkg": "^4.4.4",
     "socket.io": "^2.2.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "http-server": "^0.12.1"
+  }
 }

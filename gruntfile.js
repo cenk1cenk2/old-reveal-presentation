@@ -26,7 +26,8 @@ module.exports = grunt => {
       options: { ecma: 2015 },
       main: {
         files: [
-          { src: ['js/lib/*.js', 'js/jquery.min.js', 'js/include.js', 'js/reveal.js', 'js/app.js'], dest: 'dist/js/base.min.js' },
+          { src: ['js/lib/*.js', 'js/jquery.min.js', 'js/reveal.js', 'js/app.js'], dest: 'dist/js/base.min.js' },
+          { src: ['js/include.js'], dest: 'dist/js/include.min.js' }
         ]
       }
     },
@@ -142,7 +143,7 @@ module.exports = grunt => {
           'favicon.png',
           'gruntfile.js',
           'index.html',
-          'package.json',
+          'package.json'
         ],
         dest: 'bundle.zip'
       }
