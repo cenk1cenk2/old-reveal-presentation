@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*!
  * reveal.js
  * http://revealjs.com
@@ -5,7 +6,7 @@
  *
  * Copyright (C) 2019 Hakim El Hattab, http://hakim.se
  */
-(function (root, factory) {
+;(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(function () {
@@ -19,7 +20,7 @@
     // Browser globals.
     root.Reveal = factory()
   }
-}(this, function () {
+})(this, function () {
   'use strict'
 
   var Reveal
@@ -35,7 +36,6 @@
 
   // Configuration defaults, can be overridden at initialization time
   var config = {
-
     // The "normal" size of the presentation, aspect ratio will be preserved
     // when the presentation is scaled to fit different resolutions
     width: 960,
@@ -280,7 +280,6 @@
 
     // Script dependencies to load
     dependencies: []
-
   }
 
   // Flags if Reveal.initialize() has been called
@@ -381,9 +380,9 @@
   var registeredKeyBindings = {}
 
   /**
-	 * Starts up the presentation if the client is capable.
-	 */
-  function initialize (options) {
+   * Starts up the presentation if the client is capable.
+   */
+  function initialize(options) {
     // Make sure we only initialize once
     if (initialized === true) return
 
@@ -439,22 +438,24 @@
   }
 
   /**
-	 * Inspect the client to see what it's capable of, this
-	 * should only happens once per runtime.
-	 */
-  function checkCapabilities () {
+   * Inspect the client to see what it's capable of, this
+   * should only happens once per runtime.
+   */
+  function checkCapabilities() {
     isMobileDevice = /(iphone|ipod|ipad|android)/gi.test(UA)
     isChrome = /chrome/i.test(UA) && !/edge/i.test(UA)
 
     var testElement = document.createElement('div')
 
-    features.transforms3d = 'WebkitPerspective' in testElement.style ||
+    features.transforms3d =
+      'WebkitPerspective' in testElement.style ||
       'MozPerspective' in testElement.style ||
       'msPerspective' in testElement.style ||
       'OPerspective' in testElement.style ||
       'perspective' in testElement.style
 
-    features.transforms2d = 'WebkitTransform' in testElement.style ||
+    features.transforms2d =
+      'WebkitTransform' in testElement.style ||
       'MozTransform' in testElement.style ||
       'msTransform' in testElement.style ||
       'OTransform' in testElement.style ||
@@ -472,18 +473,17 @@
     // Flags if we should use zoom instead of transform to scale
     // up slides. Zoom produces crisper results but has a lot of
     // xbrowser quirks so we only use it in whitelsited browsers.
-    features.zoom = 'zoom' in testElement.style && !isMobileDevice &&
-      (isChrome || /Version\/[\d\.]+.*Safari/.test(UA))
+    features.zoom = 'zoom' in testElement.style && !isMobileDevice && (isChrome || /Version\/[\d\.]+.*Safari/.test(UA))
   }
 
   /**
-	 * Loads the dependencies of reveal.js. Dependencies are
-	 * defined via the configuration option 'dependencies'
-	 * and will be loaded prior to starting/binding reveal.js.
-	 * Some dependencies may have an 'async' flag, if so they
-	 * will load after reveal.js has been started up.
-	 */
-  function load () {
+   * Loads the dependencies of reveal.js. Dependencies are
+   * defined via the configuration option 'dependencies'
+   * and will be loaded prior to starting/binding reveal.js.
+   * Some dependencies may have an 'async' flag, if so they
+   * will load after reveal.js has been started up.
+   */
+  function load() {
     var scripts = []
     var scriptsToLoad = 0
 
@@ -517,10 +517,10 @@
   }
 
   /**
-	 * Initializes our plugins and waits for them to be ready
-	 * before proceeding.
-	 */
-  function initPlugins () {
+   * Initializes our plugins and waits for them to be ready
+   * before proceeding.
+   */
+  function initPlugins() {
     var pluginsToInitialize = Object.keys(plugins).length
 
     // If there are no plugins, skip this step
@@ -556,9 +556,9 @@
   }
 
   /**
-	 * Loads all async reveal.js dependencies.
-	 */
-  function loadAsyncDependencies () {
+   * Loads all async reveal.js dependencies.
+   */
+  function loadAsyncDependencies() {
     if (asyncDependencies.length) {
       asyncDependencies.forEach(function (s) {
         loadScript(s.src, s.callback)
@@ -569,13 +569,13 @@
   }
 
   /**
-	 * Loads a JavaScript file from the given URL and executes it.
-	 *
-	 * @param {string} url Address of the .js file to load
-	 * @param {function} callback Method to invoke when the script
-	 * has loaded and executed
-	 */
-  function loadScript (url, callback) {
+   * Loads a JavaScript file from the given URL and executes it.
+   *
+   * @param {string} url Address of the .js file to load
+   * @param {function} callback Method to invoke when the script
+   * has loaded and executed
+   */
+  function loadScript(url, callback) {
     var script = document.createElement('script')
     script.type = 'text/javascript'
     script.async = false
@@ -585,7 +585,7 @@
     if (callback) {
       // Success callback
       script.onload = script.onreadystatechange = function (event) {
-        if (event.type === 'load' || (/loaded|complete/.test(script.readyState))) {
+        if (event.type === 'load' || /loaded|complete/.test(script.readyState)) {
           // Kill event listeners
           script.onload = script.onreadystatechange = script.onerror = null
 
@@ -608,10 +608,10 @@
   }
 
   /**
-	 * Starts up reveal.js by binding input events and navigating
-	 * to the current URL deeplink if there is one.
-	 */
-  function start () {
+   * Starts up reveal.js by binding input events and navigating
+   * to the current URL deeplink if there is one.
+   */
+  function start() {
     loaded = true
 
     // Make sure we've got all the DOM elements we need
@@ -665,11 +665,11 @@
   }
 
   /**
-	 * Finds and stores references to DOM elements which are
-	 * required by the presentation. If a required element is
-	 * not found, it is created.
-	 */
-  function setupDOM () {
+   * Finds and stores references to DOM elements which are
+   * required by the presentation. If a required element is
+   * not found, it is created.
+   */
+  function setupDOM() {
     // Prevent transitions while we're loading
     dom.slides.classList.add('no-transition')
 
@@ -693,11 +693,15 @@
     dom.progressbar = dom.progress.querySelector('span')
 
     // Arrow controls
-    dom.controls = createSingletonNode(dom.wrapper, 'aside', 'controls',
+    dom.controls = createSingletonNode(
+      dom.wrapper,
+      'aside',
+      'controls',
       '<button class="navigate-left" aria-label="previous slide"><div class="controls-arrow"></div></button>' +
-      '<button class="navigate-right" aria-label="next slide"><div class="controls-arrow"></div></button>' +
-      '<button class="navigate-up" aria-label="above slide"><div class="controls-arrow"></div></button>' +
-      '<button class="navigate-down" aria-label="below slide"><div class="controls-arrow"></div></button>')
+        '<button class="navigate-right" aria-label="next slide"><div class="controls-arrow"></div></button>' +
+        '<button class="navigate-up" aria-label="above slide"><div class="controls-arrow"></div></button>' +
+        '<button class="navigate-down" aria-label="below slide"><div class="controls-arrow"></div></button>'
+    )
 
     // Slide number
     dom.slideNumber = createSingletonNode(dom.wrapper, 'div', 'slide-number', '')
@@ -728,13 +732,13 @@
   }
 
   /**
-	 * Creates a hidden div with role aria-live to announce the
-	 * current slide content. Hide the div off-screen to make it
-	 * available only to Assistive Technologies.
-	 *
-	 * @return {HTMLElement}
-	 */
-  function createStatusDiv () {
+   * Creates a hidden div with role aria-live to announce the
+   * current slide content. Hide the div off-screen to make it
+   * available only to Assistive Technologies.
+   *
+   * @return {HTMLElement}
+   */
+  function createStatusDiv() {
     var statusDiv = document.getElementById('aria-status-div')
     if (!statusDiv) {
       statusDiv = document.createElement('div')
@@ -752,11 +756,11 @@
   }
 
   /**
-	 * Converts the given HTML element into a string of text
-	 * that can be announced to a screen reader. Hidden
-	 * elements are excluded.
-	 */
-  function getStatusText (node) {
+   * Converts the given HTML element into a string of text
+   * that can be announced to a screen reader. Hidden
+   * elements are excluded.
+   */
+  function getStatusText(node) {
     var text = ''
 
     // Text node
@@ -778,10 +782,10 @@
   }
 
   /**
-	 * Configures the presentation for printing to a static
-	 * PDF.
-	 */
-  function setupPDF () {
+   * Configures the presentation for printing to a static
+   * PDF.
+   */
+  function setupPDF() {
     var slideSize = getComputedSlideSize(window.innerWidth, window.innerHeight)
 
     // Dimensions of the PDF pages
@@ -834,7 +838,7 @@
         numberOfPages = Math.min(numberOfPages, config.pdfMaxPagesPerSlide)
 
         // Center slides vertically
-        if (numberOfPages === 1 && config.center || slide.classList.contains('center')) {
+        if ((numberOfPages === 1 && config.center) || slide.classList.contains('center')) {
           top = Math.max((pageHeight - contentHeight) / 2, 0)
         }
 
@@ -842,7 +846,7 @@
         // so that no page ever flows onto another
         var page = document.createElement('div')
         page.className = 'pdf-page'
-        page.style.height = ((pageHeight + config.pdfPageHeightOffset) * numberOfPages) + 'px'
+        page.style.height = (pageHeight + config.pdfPageHeightOffset) * numberOfPages + 'px'
         slide.parentNode.insertBefore(page, slide)
         page.appendChild(slide)
 
@@ -873,7 +877,7 @@
             } else {
               notesElement.style.left = notesSpacing + 'px'
               notesElement.style.bottom = notesSpacing + 'px'
-              notesElement.style.width = (pageWidth - notesSpacing * 2) + 'px'
+              notesElement.style.width = pageWidth - notesSpacing * 2 + 'px'
               page.appendChild(notesElement)
             }
           }
@@ -943,15 +947,15 @@
   }
 
   /**
-	 * This is an unfortunate necessity. Some actions – such as
-	 * an input field being focused in an iframe or using the
-	 * keyboard to expand text selection beyond the bounds of
-	 * a slide – can trigger our content to be pushed out of view.
-	 * This scrolling can not be prevented by hiding overflow in
-	 * CSS (we already do) so we have to resort to repeatedly
-	 * checking if the slides have been offset :(
-	 */
-  function setupScrollPrevention () {
+   * This is an unfortunate necessity. Some actions – such as
+   * an input field being focused in an iframe or using the
+   * keyboard to expand text selection beyond the bounds of
+   * a slide – can trigger our content to be pushed out of view.
+   * This scrolling can not be prevented by hiding overflow in
+   * CSS (we already do) so we have to resort to repeatedly
+   * checking if the slides have been offset :(
+   */
+  function setupScrollPrevention() {
     setInterval(function () {
       if (dom.wrapper.scrollTop !== 0 || dom.wrapper.scrollLeft !== 0) {
         dom.wrapper.scrollTop = 0
@@ -961,18 +965,18 @@
   }
 
   /**
-	 * Creates an HTML element and returns a reference to it.
-	 * If the element already exists the existing instance will
-	 * be returned.
-	 *
-	 * @param {HTMLElement} container
-	 * @param {string} tagname
-	 * @param {string} classname
-	 * @param {string} innerHTML
-	 *
-	 * @return {HTMLElement}
-	 */
-  function createSingletonNode (container, tagname, classname, innerHTML) {
+   * Creates an HTML element and returns a reference to it.
+   * If the element already exists the existing instance will
+   * be returned.
+   *
+   * @param {HTMLElement} container
+   * @param {string} tagname
+   * @param {string} classname
+   * @param {string} innerHTML
+   *
+   * @return {HTMLElement}
+   */
+  function createSingletonNode(container, tagname, classname, innerHTML) {
     // Find all nodes matching the description
     var nodes = container.querySelectorAll('.' + classname)
 
@@ -997,11 +1001,11 @@
   }
 
   /**
-	 * Creates the slide background elements and appends them
-	 * to the background container. One element is created per
-	 * slide no matter if the given slide has visible background.
-	 */
-  function createBackgrounds () {
+   * Creates the slide background elements and appends them
+   * to the background container. One element is created per
+   * slide no matter if the given slide has visible background.
+   */
+  function createBackgrounds() {
     var printMode = isPrintingPDF()
 
     // Clear prior backgrounds
@@ -1041,14 +1045,14 @@
   }
 
   /**
-	 * Creates a background for the given slide.
-	 *
-	 * @param {HTMLElement} slide
-	 * @param {HTMLElement} container The element that the background
-	 * should be appended to
-	 * @return {HTMLElement} New background div
-	 */
-  function createBackground (slide, container) {
+   * Creates a background for the given slide.
+   *
+   * @param {HTMLElement} slide
+   * @param {HTMLElement} container The element that the background
+   * should be appended to
+   * @return {HTMLElement} New background div
+   */
+  function createBackground(slide, container) {
     // Main slide background element
     var element = document.createElement('div')
     element.className = 'slide-background ' + slide.className.replace(/present|past|future/, '')
@@ -1070,12 +1074,12 @@
   }
 
   /**
-	 * Renders all of the visual properties of a slide background
-	 * based on the various background attributes.
-	 *
-	 * @param {HTMLElement} slide
-	 */
-  function syncBackground (slide) {
+   * Renders all of the visual properties of a slide background
+   * based on the various background attributes.
+   *
+   * @param {HTMLElement} slide
+   */
+  function syncBackground(slide) {
     var element = slide.slideBackgroundElement
     var contentElement = slide.slideBackgroundContentElement
 
@@ -1123,16 +1127,19 @@
     // This is used to determine when two slide backgrounds are
     // the same.
     if (data.background || data.backgroundColor || data.backgroundImage || data.backgroundVideo || data.backgroundIframe) {
-      element.setAttribute('data-background-hash', data.background +
-        data.backgroundSize +
-        data.backgroundImage +
-        data.backgroundVideo +
-        data.backgroundIframe +
-        data.backgroundColor +
-        data.backgroundRepeat +
-        data.backgroundPosition +
-        data.backgroundTransition +
-        data.backgroundOpacity)
+      element.setAttribute(
+        'data-background-hash',
+        data.background +
+          data.backgroundSize +
+          data.backgroundImage +
+          data.backgroundVideo +
+          data.backgroundIframe +
+          data.backgroundColor +
+          data.backgroundRepeat +
+          data.backgroundPosition +
+          data.backgroundTransition +
+          data.backgroundOpacity
+      )
     }
 
     // Additional and optional background properties
@@ -1176,40 +1183,44 @@
   }
 
   /**
-	 * Registers a listener to postMessage events, this makes it
-	 * possible to call all reveal.js API methods from another
-	 * window. For example:
-	 *
-	 * revealWindow.postMessage( JSON.stringify({
-	 *   method: 'slide',
-	 *   args: [ 2 ]
-	 * }), '*' );
-	 */
-  function setupPostMessage () {
+   * Registers a listener to postMessage events, this makes it
+   * possible to call all reveal.js API methods from another
+   * window. For example:
+   *
+   * revealWindow.postMessage( JSON.stringify({
+   *   method: 'slide',
+   *   args: [ 2 ]
+   * }), '*' );
+   */
+  function setupPostMessage() {
     if (config.postMessage) {
-      window.addEventListener('message', function (event) {
-        var data = event.data
+      window.addEventListener(
+        'message',
+        function (event) {
+          var data = event.data
 
-        // Make sure we're dealing with JSON
-        if (typeof data === 'string' && data.charAt(0) === '{' && data.charAt(data.length - 1) === '}') {
-          data = JSON.parse(data)
+          // Make sure we're dealing with JSON
+          if (typeof data === 'string' && data.charAt(0) === '{' && data.charAt(data.length - 1) === '}') {
+            data = JSON.parse(data)
 
-          // Check if the requested method can be found
-          if (data.method && typeof Reveal[data.method] === 'function') {
-            Reveal[data.method].apply(Reveal, data.args)
+            // Check if the requested method can be found
+            if (data.method && typeof Reveal[data.method] === 'function') {
+              Reveal[data.method].apply(Reveal, data.args)
+            }
           }
-        }
-      }, false)
+        },
+        false
+      )
     }
   }
 
   /**
-	 * Applies the configuration settings from the config
-	 * object. May be called multiple times.
-	 *
-	 * @param {object} options
-	 */
-  function configure (options) {
+   * Applies the configuration settings from the config
+   * object. May be called multiple times.
+   *
+   * @param {object} options
+   */
+  function configure(options) {
     var oldTransition = config.transition
 
     // New config options may be passed when this method
@@ -1366,9 +1377,9 @@
   }
 
   /**
-	 * Binds all event listeners.
-	 */
-  function addEventListeners () {
+   * Binds all event listeners.
+   */
+  function addEventListeners() {
     eventsAreBound = true
 
     window.addEventListener('hashchange', onWindowHashChange, false)
@@ -1431,19 +1442,31 @@
     }
 
     pointerEvents.forEach(function (eventName) {
-      dom.controlsLeft.forEach(function (el) { el.addEventListener(eventName, onNavigateLeftClicked, false) })
-      dom.controlsRight.forEach(function (el) { el.addEventListener(eventName, onNavigateRightClicked, false) })
-      dom.controlsUp.forEach(function (el) { el.addEventListener(eventName, onNavigateUpClicked, false) })
-      dom.controlsDown.forEach(function (el) { el.addEventListener(eventName, onNavigateDownClicked, false) })
-      dom.controlsPrev.forEach(function (el) { el.addEventListener(eventName, onNavigatePrevClicked, false) })
-      dom.controlsNext.forEach(function (el) { el.addEventListener(eventName, onNavigateNextClicked, false) })
+      dom.controlsLeft.forEach(function (el) {
+        el.addEventListener(eventName, onNavigateLeftClicked, false)
+      })
+      dom.controlsRight.forEach(function (el) {
+        el.addEventListener(eventName, onNavigateRightClicked, false)
+      })
+      dom.controlsUp.forEach(function (el) {
+        el.addEventListener(eventName, onNavigateUpClicked, false)
+      })
+      dom.controlsDown.forEach(function (el) {
+        el.addEventListener(eventName, onNavigateDownClicked, false)
+      })
+      dom.controlsPrev.forEach(function (el) {
+        el.addEventListener(eventName, onNavigatePrevClicked, false)
+      })
+      dom.controlsNext.forEach(function (el) {
+        el.addEventListener(eventName, onNavigateNextClicked, false)
+      })
     })
   }
 
   /**
-	 * Unbinds all event listeners.
-	 */
-  function removeEventListeners () {
+   * Unbinds all event listeners.
+   */
+  function removeEventListeners() {
     eventsAreBound = false
 
     document.removeEventListener('keydown', onDocumentKeyDown, false)
@@ -1469,24 +1492,36 @@
       dom.progress.removeEventListener('click', onProgressClicked, false)
     }
 
-    ['touchstart', 'click'].forEach(function (eventName) {
-      dom.controlsLeft.forEach(function (el) { el.removeEventListener(eventName, onNavigateLeftClicked, false) })
-      dom.controlsRight.forEach(function (el) { el.removeEventListener(eventName, onNavigateRightClicked, false) })
-      dom.controlsUp.forEach(function (el) { el.removeEventListener(eventName, onNavigateUpClicked, false) })
-      dom.controlsDown.forEach(function (el) { el.removeEventListener(eventName, onNavigateDownClicked, false) })
-      dom.controlsPrev.forEach(function (el) { el.removeEventListener(eventName, onNavigatePrevClicked, false) })
-      dom.controlsNext.forEach(function (el) { el.removeEventListener(eventName, onNavigateNextClicked, false) })
+    ;['touchstart', 'click'].forEach(function (eventName) {
+      dom.controlsLeft.forEach(function (el) {
+        el.removeEventListener(eventName, onNavigateLeftClicked, false)
+      })
+      dom.controlsRight.forEach(function (el) {
+        el.removeEventListener(eventName, onNavigateRightClicked, false)
+      })
+      dom.controlsUp.forEach(function (el) {
+        el.removeEventListener(eventName, onNavigateUpClicked, false)
+      })
+      dom.controlsDown.forEach(function (el) {
+        el.removeEventListener(eventName, onNavigateDownClicked, false)
+      })
+      dom.controlsPrev.forEach(function (el) {
+        el.removeEventListener(eventName, onNavigatePrevClicked, false)
+      })
+      dom.controlsNext.forEach(function (el) {
+        el.removeEventListener(eventName, onNavigateNextClicked, false)
+      })
     })
   }
 
   /**
-	 * Registers a new plugin with this reveal.js instance.
-	 *
-	 * reveal.js waits for all regisered plugins to initialize
-	 * before considering itself ready, as long as the plugin
-	 * is registered before calling `Reveal.initialize()`.
-	 */
-  function registerPlugin (id, plugin) {
+   * Registers a new plugin with this reveal.js instance.
+   *
+   * reveal.js waits for all regisered plugins to initialize
+   * before considering itself ready, as long as the plugin
+   * is registered before calling `Reveal.initialize()`.
+   */
+  function registerPlugin(id, plugin) {
     if (plugins[id] === undefined) {
       plugins[id] = plugin
 
@@ -1501,29 +1536,29 @@
   }
 
   /**
-	 * Checks if a specific plugin has been registered.
-	 *
-	 * @param {String} id Unique plugin identifier
-	 */
-  function hasPlugin (id) {
+   * Checks if a specific plugin has been registered.
+   *
+   * @param {String} id Unique plugin identifier
+   */
+  function hasPlugin(id) {
     return !!plugins[id]
   }
 
   /**
-	 * Returns the specific plugin instance, if a plugin
-	 * with the given ID has been registered.
-	 *
-	 * @param {String} id Unique plugin identifier
-	 */
-  function getPlugin (id) {
+   * Returns the specific plugin instance, if a plugin
+   * with the given ID has been registered.
+   *
+   * @param {String} id Unique plugin identifier
+   */
+  function getPlugin(id) {
     return plugins[id]
   }
 
   /**
-	 * Add a custom key binding with optional description to
-	 * be added to the help screen.
-	 */
-  function addKeyBinding (binding, callback) {
+   * Add a custom key binding with optional description to
+   * be added to the help screen.
+   */
+  function addKeyBinding(binding, callback) {
     if (typeof binding === 'object' && binding.keyCode) {
       registeredKeyBindings[binding.keyCode] = {
         callback: callback,
@@ -1540,20 +1575,20 @@
   }
 
   /**
-	 * Removes the specified custom key binding.
-	 */
-  function removeKeyBinding (keyCode) {
+   * Removes the specified custom key binding.
+   */
+  function removeKeyBinding(keyCode) {
     delete registeredKeyBindings[keyCode]
   }
 
   /**
-	 * Extend object a with the properties of object b.
-	 * If there's a conflict, object b takes precedence.
-	 *
-	 * @param {object} a
-	 * @param {object} b
-	 */
-  function extend (a, b) {
+   * Extend object a with the properties of object b.
+   * If there's a conflict, object b takes precedence.
+   *
+   * @param {object} a
+   * @param {object} b
+   */
+  function extend(a, b) {
     for (var i in b) {
       a[i] = b[i]
     }
@@ -1562,22 +1597,22 @@
   }
 
   /**
-	 * Converts the target object to an array.
-	 *
-	 * @param {object} o
-	 * @return {object[]}
-	 */
-  function toArray (o) {
+   * Converts the target object to an array.
+   *
+   * @param {object} o
+   * @return {object[]}
+   */
+  function toArray(o) {
     return Array.prototype.slice.call(o)
   }
 
   /**
-	 * Utility for deserializing a value.
-	 *
-	 * @param {*} value
-	 * @return {*}
-	 */
-  function deserialize (value) {
+   * Utility for deserializing a value.
+   *
+   * @param {*} value
+   * @return {*}
+   */
+  function deserialize(value) {
     if (typeof value === 'string') {
       if (value === 'null') return null
       else if (value === 'true') return true
@@ -1589,15 +1624,15 @@
   }
 
   /**
-	 * Measures the distance in pixels between point a
-	 * and point b.
-	 *
-	 * @param {object} a point with x/y properties
-	 * @param {object} b point with x/y properties
-	 *
-	 * @return {number}
-	 */
-  function distanceBetween (a, b) {
+   * Measures the distance in pixels between point a
+   * and point b.
+   *
+   * @param {object} a point with x/y properties
+   * @param {object} b point with x/y properties
+   *
+   * @return {number}
+   */
+  function distanceBetween(a, b) {
     var dx = a.x - b.x
     var dy = a.y - b.y
 
@@ -1605,12 +1640,12 @@
   }
 
   /**
-	 * Applies a CSS transform to the target element.
-	 *
-	 * @param {HTMLElement} element
-	 * @param {string} transform
-	 */
-  function transformElement (element, transform) {
+   * Applies a CSS transform to the target element.
+   *
+   * @param {HTMLElement} element
+   * @param {string} transform
+   */
+  function transformElement(element, transform) {
     element.style.WebkitTransform = transform
     element.style.MozTransform = transform
     element.style.msTransform = transform
@@ -1618,13 +1653,13 @@
   }
 
   /**
-	 * Applies CSS transforms to the slides container. The container
-	 * is transformed from two separate sources: layout and the overview
-	 * mode.
-	 *
-	 * @param {object} transforms
-	 */
-  function transformSlides (transforms) {
+   * Applies CSS transforms to the slides container. The container
+   * is transformed from two separate sources: layout and the overview
+   * mode.
+   *
+   * @param {object} transforms
+   */
+  function transformSlides(transforms) {
     // Pick up new transforms from arguments
     if (typeof transforms.layout === 'string') slidesTransform.layout = transforms.layout
     if (typeof transforms.overview === 'string') slidesTransform.overview = transforms.overview
@@ -1638,11 +1673,11 @@
   }
 
   /**
-	 * Injects the given CSS styles into the DOM.
-	 *
-	 * @param {string} value
-	 */
-  function injectStyleSheet (value) {
+   * Injects the given CSS styles into the DOM.
+   *
+   * @param {string} value
+   */
+  function injectStyleSheet(value) {
     var tag = document.createElement('style')
     tag.type = 'text/css'
     if (tag.styleSheet) {
@@ -1654,17 +1689,17 @@
   }
 
   /**
-	 * Find the closest parent that matches the given
-	 * selector.
-	 *
-	 * @param {HTMLElement} target The child element
-	 * @param {String} selector The CSS selector to match
-	 * the parents against
-	 *
-	 * @return {HTMLElement} The matched parent or null
-	 * if no matching parent was found
-	 */
-  function closestParent (target, selector) {
+   * Find the closest parent that matches the given
+   * selector.
+   *
+   * @param {HTMLElement} target The child element
+   * @param {String} selector The CSS selector to match
+   * the parents against
+   *
+   * @return {HTMLElement} The matched parent or null
+   * if no matching parent was found
+   */
+  function closestParent(target, selector) {
     var parent = target.parentNode
 
     while (parent) {
@@ -1686,21 +1721,21 @@
   }
 
   /**
-	 * Converts various color input formats to an {r:0,g:0,b:0} object.
-	 *
-	 * @param {string} color The string representation of a color
-	 * @example
-	 * colorToRgb('#000');
-	 * @example
-	 * colorToRgb('#000000');
-	 * @example
-	 * colorToRgb('rgb(0,0,0)');
-	 * @example
-	 * colorToRgb('rgba(0,0,0)');
-	 *
-	 * @return {{r: number, g: number, b: number, [a]: number}|null}
-	 */
-  function colorToRgb (color) {
+   * Converts various color input formats to an {r:0,g:0,b:0} object.
+   *
+   * @param {string} color The string representation of a color
+   * @example
+   * colorToRgb('#000');
+   * @example
+   * colorToRgb('#000000');
+   * @example
+   * colorToRgb('rgb(0,0,0)');
+   * @example
+   * colorToRgb('rgba(0,0,0)');
+   *
+   * @return {{r: number, g: number, b: number, [a]: number}|null}
+   */
+  function colorToRgb(color) {
     var hex3 = color.match(/^#([0-9a-f]{3})$/i)
     if (hex3 && hex3[1]) {
       hex3 = hex3[1]
@@ -1744,12 +1779,12 @@
   }
 
   /**
-	 * Calculates brightness on a scale of 0-255.
-	 *
-	 * @param {string} color See colorToRgb for supported formats.
-	 * @see {@link colorToRgb}
-	 */
-  function colorBrightness (color) {
+   * Calculates brightness on a scale of 0-255.
+   *
+   * @param {string} color See colorToRgb for supported formats.
+   * @see {@link colorToRgb}
+   */
+  function colorBrightness(color) {
     if (typeof color === 'string') color = colorToRgb(color)
 
     if (color) {
@@ -1760,19 +1795,20 @@
   }
 
   /**
-	 * Returns the remaining height within the parent of the
-	 * target element.
-	 *
-	 * remaining height = [ configured parent height ] - [ current parent height ]
-	 *
-	 * @param {HTMLElement} element
-	 * @param {number} [height]
-	 */
-  function getRemainingHeight (element, height) {
+   * Returns the remaining height within the parent of the
+   * target element.
+   *
+   * remaining height = [ configured parent height ] - [ current parent height ]
+   *
+   * @param {HTMLElement} element
+   * @param {number} [height]
+   */
+  function getRemainingHeight(element, height) {
     height = height || 0
 
     if (element) {
-      var newHeight; var oldHeight = element.style.height
+      var newHeight
+      var oldHeight = element.style.height
 
       // Change the .stretch element height to 0 in order find the height of all
       // the other elements
@@ -1797,16 +1833,16 @@
   }
 
   /**
-	 * Checks if this instance is being used to print a PDF.
-	 */
-  function isPrintingPDF () {
-    return (/print-pdf/gi).test(window.location.search)
+   * Checks if this instance is being used to print a PDF.
+   */
+  function isPrintingPDF() {
+    return /print-pdf/gi.test(window.location.search)
   }
 
   /**
-	 * Hides the address bar if we're on a mobile device.
-	 */
-  function hideAddressBar () {
+   * Hides the address bar if we're on a mobile device.
+   */
+  function hideAddressBar() {
     if (config.hideAddressBar && isMobileDevice) {
       // Events that should trigger the address bar to hide
       window.addEventListener('load', removeAddressBar, false)
@@ -1815,20 +1851,20 @@
   }
 
   /**
-	 * Causes the address bar to hide on mobile devices,
-	 * more vertical space ftw.
-	 */
-  function removeAddressBar () {
+   * Causes the address bar to hide on mobile devices,
+   * more vertical space ftw.
+   */
+  function removeAddressBar() {
     setTimeout(function () {
       window.scrollTo(0, 1)
     }, 10)
   }
 
   /**
-	 * Dispatches an event of the specified type from the
-	 * reveal DOM element.
-	 */
-  function dispatchEvent (type, args) {
+   * Dispatches an event of the specified type from the
+   * reveal DOM element.
+   */
+  function dispatchEvent(type, args) {
     var event = document.createEvent('HTMLEvents', 1, 2)
     event.initEvent(type, true, true)
     extend(event, args)
@@ -1842,9 +1878,9 @@
   }
 
   /**
-	 * Wrap all links in 3D goodness.
-	 */
-  function enableRollingLinks () {
+   * Wrap all links in 3D goodness.
+   */
+  function enableRollingLinks() {
     if (features.transforms3d && !('msPerspective' in document.body.style)) {
       var anchors = dom.wrapper.querySelectorAll(SLIDES_SELECTOR + ' a')
 
@@ -1865,9 +1901,9 @@
   }
 
   /**
-	 * Unwrap all 3D links.
-	 */
-  function disableRollingLinks () {
+   * Unwrap all 3D links.
+   */
+  function disableRollingLinks() {
     var anchors = dom.wrapper.querySelectorAll(SLIDES_SELECTOR + ' a.roll')
 
     for (var i = 0, len = anchors.length; i < len; i++) {
@@ -1882,11 +1918,11 @@
   }
 
   /**
-	 * Bind preview frame links.
-	 *
-	 * @param {string} [selector=a] - selector for anchors
-	 */
-  function enablePreviewLinks (selector) {
+   * Bind preview frame links.
+   *
+   * @param {string} [selector=a] - selector for anchors
+   */
+  function enablePreviewLinks(selector) {
     var anchors = toArray(document.querySelectorAll(selector || 'a'))
 
     anchors.forEach(function (element) {
@@ -1897,9 +1933,9 @@
   }
 
   /**
-	 * Unbind preview frame links.
-	 */
-  function disablePreviewLinks (selector) {
+   * Unbind preview frame links.
+   */
+  function disablePreviewLinks(selector) {
     var anchors = toArray(document.querySelectorAll(selector || 'a'))
 
     anchors.forEach(function (element) {
@@ -1910,11 +1946,11 @@
   }
 
   /**
-	 * Opens a preview window for the target URL.
-	 *
-	 * @param {string} url - url for preview iframe src
-	 */
-  function showPreview (url) {
+   * Opens a preview window for the target URL.
+   *
+   * @param {string} url - url for preview iframe src
+   */
+  function showPreview(url) {
     closeOverlay()
 
     dom.overlay = document.createElement('div')
@@ -1936,18 +1972,30 @@
       '</div>'
     ].join('')
 
-    dom.overlay.querySelector('iframe').addEventListener('load', function (event) {
-      dom.overlay.classList.add('loaded')
-    }, false)
+    dom.overlay.querySelector('iframe').addEventListener(
+      'load',
+      function (event) {
+        dom.overlay.classList.add('loaded')
+      },
+      false
+    )
 
-    dom.overlay.querySelector('.close').addEventListener('click', function (event) {
-      closeOverlay()
-      event.preventDefault()
-    }, false)
+    dom.overlay.querySelector('.close').addEventListener(
+      'click',
+      function (event) {
+        closeOverlay()
+        event.preventDefault()
+      },
+      false
+    )
 
-    dom.overlay.querySelector('.external').addEventListener('click', function (event) {
-      closeOverlay()
-    }, false)
+    dom.overlay.querySelector('.external').addEventListener(
+      'click',
+      function (event) {
+        closeOverlay()
+      },
+      false
+    )
 
     setTimeout(function () {
       dom.overlay.classList.add('visible')
@@ -1955,13 +2003,13 @@
   }
 
   /**
-	 * Open or close help overlay window.
-	 *
-	 * @param {Boolean} [override] Flag which overrides the
-	 * toggle logic and forcibly sets the desired state. True means
-	 * help is open, false means it's closed.
-	 */
-  function toggleHelp (override) {
+   * Open or close help overlay window.
+   *
+   * @param {Boolean} [override] Flag which overrides the
+   * toggle logic and forcibly sets the desired state. True means
+   * help is open, false means it's closed.
+   */
+  function toggleHelp(override) {
     if (typeof override === 'boolean') {
       override ? showHelp() : closeOverlay()
     } else {
@@ -1974,9 +2022,9 @@
   }
 
   /**
-	 * Opens an overlay window with help material.
-	 */
-  function showHelp () {
+   * Opens an overlay window with help material.
+   */
+  function showHelp() {
     if (config.help) {
       closeOverlay()
 
@@ -2010,10 +2058,14 @@
         '</div>'
       ].join('')
 
-      dom.overlay.querySelector('.close').addEventListener('click', function (event) {
-        closeOverlay()
-        event.preventDefault()
-      }, false)
+      dom.overlay.querySelector('.close').addEventListener(
+        'click',
+        function (event) {
+          closeOverlay()
+          event.preventDefault()
+        },
+        false
+      )
 
       setTimeout(function () {
         dom.overlay.classList.add('visible')
@@ -2022,9 +2074,9 @@
   }
 
   /**
-	 * Closes any currently open overlay.
-	 */
-  function closeOverlay () {
+   * Closes any currently open overlay.
+   */
+  function closeOverlay() {
     if (dom.overlay) {
       dom.overlay.parentNode.removeChild(dom.overlay)
       dom.overlay = null
@@ -2032,10 +2084,10 @@
   }
 
   /**
-	 * Applies JavaScript-controlled layout rules to the
-	 * presentation.
-	 */
-  function layout () {
+   * Applies JavaScript-controlled layout rules to the
+   * presentation.
+   */
+  function layout() {
     if (dom.wrapper && !isPrintingPDF()) {
       if (!config.disableLayout) {
         // On some mobile devices '100vh' is taller than the visible
@@ -2045,7 +2097,7 @@
         //
         // https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
         if (isMobileDevice) {
-          document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px')
+          document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px')
         }
 
         var size = getComputedSlideSize()
@@ -2139,13 +2191,13 @@
   }
 
   /**
-	 * Applies layout logic to the contents of all slides in
-	 * the presentation.
-	 *
-	 * @param {string|number} width
-	 * @param {string|number} height
-	 */
-  function layoutSlideContents (width, height) {
+   * Applies layout logic to the contents of all slides in
+   * the presentation.
+   *
+   * @param {string|number} width
+   * @param {string|number} height
+   */
+  function layoutSlideContents(width, height) {
     // Handle sizing of elements with the 'stretch' class
     toArray(dom.slides.querySelectorAll('section > .stretch')).forEach(function (element) {
       // Determine how much vertical space we can use
@@ -2158,8 +2210,8 @@
 
         var es = Math.min(width / nw, remainingHeight / nh)
 
-        element.style.width = (nw * es) + 'px'
-        element.style.height = (nh * es) + 'px'
+        element.style.width = nw * es + 'px'
+        element.style.height = nh * es + 'px'
       } else {
         element.style.width = width + 'px'
         element.style.height = remainingHeight + 'px'
@@ -2168,14 +2220,14 @@
   }
 
   /**
-	 * Calculates the computed pixel size of our slides. These
-	 * values are based on the width and height configuration
-	 * options.
-	 *
-	 * @param {number} [presentationWidth=dom.wrapper.offsetWidth]
-	 * @param {number} [presentationHeight=dom.wrapper.offsetHeight]
-	 */
-  function getComputedSlideSize (presentationWidth, presentationHeight) {
+   * Calculates the computed pixel size of our slides. These
+   * values are based on the width and height configuration
+   * options.
+   *
+   * @param {number} [presentationWidth=dom.wrapper.offsetWidth]
+   * @param {number} [presentationHeight=dom.wrapper.offsetHeight]
+   */
+  function getComputedSlideSize(presentationWidth, presentationHeight) {
     var size = {
       // Slide size
       width: config.width,
@@ -2187,44 +2239,44 @@
     }
 
     // Reduce available space by margin
-    size.presentationWidth -= (size.presentationWidth * config.margin)
-    size.presentationHeight -= (size.presentationHeight * config.margin)
+    size.presentationWidth -= size.presentationWidth * config.margin
+    size.presentationHeight -= size.presentationHeight * config.margin
 
     // Slide width may be a percentage of available width
     if (typeof size.width === 'string' && /%$/.test(size.width)) {
-      size.width = parseInt(size.width, 10) / 100 * size.presentationWidth
+      size.width = (parseInt(size.width, 10) / 100) * size.presentationWidth
     }
 
     // Slide height may be a percentage of available height
     if (typeof size.height === 'string' && /%$/.test(size.height)) {
-      size.height = parseInt(size.height, 10) / 100 * size.presentationHeight
+      size.height = (parseInt(size.height, 10) / 100) * size.presentationHeight
     }
 
     return size
   }
 
   /**
-	 * Stores the vertical index of a stack so that the same
-	 * vertical slide can be selected when navigating to and
-	 * from the stack.
-	 *
-	 * @param {HTMLElement} stack The vertical stack element
-	 * @param {string|number} [v=0] Index to memorize
-	 */
-  function setPreviousVerticalIndex (stack, v) {
+   * Stores the vertical index of a stack so that the same
+   * vertical slide can be selected when navigating to and
+   * from the stack.
+   *
+   * @param {HTMLElement} stack The vertical stack element
+   * @param {string|number} [v=0] Index to memorize
+   */
+  function setPreviousVerticalIndex(stack, v) {
     if (typeof stack === 'object' && typeof stack.setAttribute === 'function') {
       stack.setAttribute('data-previous-indexv', v || 0)
     }
   }
 
   /**
-	 * Retrieves the vertical index which was stored using
-	 * #setPreviousVerticalIndex() or 0 if no previous index
-	 * exists.
-	 *
-	 * @param {HTMLElement} stack The vertical stack element
-	 */
-  function getPreviousVerticalIndex (stack) {
+   * Retrieves the vertical index which was stored using
+   * #setPreviousVerticalIndex() or 0 if no previous index
+   * exists.
+   *
+   * @param {HTMLElement} stack The vertical stack element
+   */
+  function getPreviousVerticalIndex(stack) {
     if (typeof stack === 'object' && typeof stack.setAttribute === 'function' && stack.classList.contains('stack')) {
       // Prefer manually defined start-indexv
       var attributeName = stack.hasAttribute('data-start-indexv') ? 'data-start-indexv' : 'data-previous-indexv'
@@ -2236,10 +2288,10 @@
   }
 
   /**
-	 * Displays the overview of slides (quick nav) by scaling
-	 * down and arranging all slide elements.
-	 */
-  function activateOverview () {
+   * Displays the overview of slides (quick nav) by scaling
+   * down and arranging all slide elements.
+   */
+  function activateOverview() {
     // Only proceed if enabled in config
     if (config.overview && !isOverview()) {
       overview = true
@@ -2294,57 +2346,53 @@
   }
 
   /**
-	 * Uses CSS transforms to position all slides in a grid for
-	 * display inside of the overview mode.
-	 */
-  function layoutOverview () {
+   * Uses CSS transforms to position all slides in a grid for
+   * display inside of the overview mode.
+   */
+  function layoutOverview() {
     // Layout slides
     toArray(dom.wrapper.querySelectorAll(HORIZONTAL_SLIDES_SELECTOR)).forEach(function (hslide, h) {
       hslide.setAttribute('data-index-h', h)
-      transformElement(hslide, 'translate3d(' + (h * overviewSlideWidth) + 'px, 0, 0)')
+      transformElement(hslide, 'translate3d(' + h * overviewSlideWidth + 'px, 0, 0)')
 
       if (hslide.classList.contains('stack')) {
         toArray(hslide.querySelectorAll('section')).forEach(function (vslide, v) {
           vslide.setAttribute('data-index-h', h)
           vslide.setAttribute('data-index-v', v)
 
-          transformElement(vslide, 'translate3d(0, ' + (v * overviewSlideHeight) + 'px, 0)')
+          transformElement(vslide, 'translate3d(0, ' + v * overviewSlideHeight + 'px, 0)')
         })
       }
     })
 
     // Layout slide backgrounds
     toArray(dom.background.childNodes).forEach(function (hbackground, h) {
-      transformElement(hbackground, 'translate3d(' + (h * overviewSlideWidth) + 'px, 0, 0)')
+      transformElement(hbackground, 'translate3d(' + h * overviewSlideWidth + 'px, 0, 0)')
 
       toArray(hbackground.querySelectorAll('.slide-background')).forEach(function (vbackground, v) {
-        transformElement(vbackground, 'translate3d(0, ' + (v * overviewSlideHeight) + 'px, 0)')
+        transformElement(vbackground, 'translate3d(0, ' + v * overviewSlideHeight + 'px, 0)')
       })
     })
   }
 
   /**
-	 * Moves the overview viewport to the current slides.
-	 * Called each time the current slide changes.
-	 */
-  function updateOverview () {
+   * Moves the overview viewport to the current slides.
+   * Called each time the current slide changes.
+   */
+  function updateOverview() {
     var vmin = Math.min(window.innerWidth, window.innerHeight)
     var scale = Math.max(vmin / 5, 150) / vmin
 
     transformSlides({
-      overview: [
-        'scale(' + scale + ')',
-        'translateX(' + (-indexh * overviewSlideWidth) + 'px)',
-        'translateY(' + (-indexv * overviewSlideHeight) + 'px)'
-      ].join(' ')
+      overview: ['scale(' + scale + ')', 'translateX(' + -indexh * overviewSlideWidth + 'px)', 'translateY(' + -indexv * overviewSlideHeight + 'px)'].join(' ')
     })
   }
 
   /**
-	 * Exits the slide overview and enters the currently
-	 * active slide.
-	 */
-  function deactivateOverview () {
+   * Exits the slide overview and enters the currently
+   * active slide.
+   */
+  function deactivateOverview() {
     // Only proceed if enabled in config
     if (config.overview) {
       overview = false
@@ -2394,13 +2442,13 @@
   }
 
   /**
-	 * Toggles the slide overview mode on and off.
-	 *
-	 * @param {Boolean} [override] Flag which overrides the
-	 * toggle logic and forcibly sets the desired state. True means
-	 * overview is open, false means it's closed.
-	 */
-  function toggleOverview (override) {
+   * Toggles the slide overview mode on and off.
+   *
+   * @param {Boolean} [override] Flag which overrides the
+   * toggle logic and forcibly sets the desired state. True means
+   * overview is open, false means it's closed.
+   */
+  function toggleOverview(override) {
     if (typeof override === 'boolean') {
       override ? activateOverview() : deactivateOverview()
     } else {
@@ -2409,19 +2457,19 @@
   }
 
   /**
-	 * Checks if the overview is currently active.
-	 *
-	 * @return {Boolean} true if the overview is active,
-	 * false otherwise
-	 */
-  function isOverview () {
+   * Checks if the overview is currently active.
+   *
+   * @return {Boolean} true if the overview is active,
+   * false otherwise
+   */
+  function isOverview() {
     return overview
   }
 
   /**
-	 * Return a hash URL that will resolve to the current slide location.
-	 */
-  function locationHash () {
+   * Return a hash URL that will resolve to the current slide location.
+   */
+  function locationHash() {
     var url = '/'
 
     // Attempt to create a named link based on the slide's ID
@@ -2452,14 +2500,14 @@
   }
 
   /**
-	 * Checks if the current or specified slide is vertical
-	 * (nested within another slide).
-	 *
-	 * @param {HTMLElement} [slide=currentSlide] The slide to check
-	 * orientation of
-	 * @return {Boolean}
-	 */
-  function isVerticalSlide (slide) {
+   * Checks if the current or specified slide is vertical
+   * (nested within another slide).
+   *
+   * @param {HTMLElement} [slide=currentSlide] The slide to check
+   * orientation of
+   * @return {Boolean}
+   */
+  function isVerticalSlide(slide) {
     // Prefer slide argument, otherwise use current slide
     slide = slide || currentSlide
 
@@ -2467,20 +2515,17 @@
   }
 
   /**
-	 * Handling the fullscreen functionality via the fullscreen API
-	 *
-	 * @see http://fullscreen.spec.whatwg.org/
-	 * @see https://developer.mozilla.org/en-US/docs/DOM/Using_fullscreen_mode
-	 */
-  function enterFullscreen () {
+   * Handling the fullscreen functionality via the fullscreen API
+   *
+   * @see http://fullscreen.spec.whatwg.org/
+   * @see https://developer.mozilla.org/en-US/docs/DOM/Using_fullscreen_mode
+   */
+  function enterFullscreen() {
     var element = document.documentElement
 
     // Check which implementation is available
-    var requestMethod = element.requestFullscreen ||
-      element.webkitRequestFullscreen ||
-      element.webkitRequestFullScreen ||
-      element.mozRequestFullScreen ||
-      element.msRequestFullscreen
+    var requestMethod =
+      element.requestFullscreen || element.webkitRequestFullscreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullscreen
 
     if (requestMethod) {
       requestMethod.apply(element)
@@ -2488,10 +2533,10 @@
   }
 
   /**
-	 * Shows the mouse pointer after it has been hidden with
-	 * #hideCursor.
-	 */
-  function showCursor () {
+   * Shows the mouse pointer after it has been hidden with
+   * #hideCursor.
+   */
+  function showCursor() {
     if (cursorHidden) {
       cursorHidden = false
       dom.wrapper.style.cursor = ''
@@ -2499,10 +2544,10 @@
   }
 
   /**
-	 * Hides the mouse pointer when it's on top of the .reveal
-	 * container.
-	 */
-  function hideCursor () {
+   * Hides the mouse pointer when it's on top of the .reveal
+   * container.
+   */
+  function hideCursor() {
     if (cursorHidden === false) {
       cursorHidden = true
       dom.wrapper.style.cursor = 'none'
@@ -2510,10 +2555,10 @@
   }
 
   /**
-	 * Enters the paused mode which fades everything on screen to
-	 * black.
-	 */
-  function pause () {
+   * Enters the paused mode which fades everything on screen to
+   * black.
+   */
+  function pause() {
     if (config.pause) {
       var wasPaused = dom.wrapper.classList.contains('paused')
 
@@ -2527,9 +2572,9 @@
   }
 
   /**
-	 * Exits from the paused mode.
-	 */
-  function resume () {
+   * Exits from the paused mode.
+   */
+  function resume() {
     var wasPaused = dom.wrapper.classList.contains('paused')
     dom.wrapper.classList.remove('paused')
 
@@ -2541,9 +2586,9 @@
   }
 
   /**
-	 * Toggles the paused mode on and off.
-	 */
-  function togglePause (override) {
+   * Toggles the paused mode on and off.
+   */
+  function togglePause(override) {
     if (typeof override === 'boolean') {
       override ? pause() : resume()
     } else {
@@ -2552,22 +2597,22 @@
   }
 
   /**
-	 * Checks if we are currently in the paused mode.
-	 *
-	 * @return {Boolean}
-	 */
-  function isPaused () {
+   * Checks if we are currently in the paused mode.
+   *
+   * @return {Boolean}
+   */
+  function isPaused() {
     return dom.wrapper.classList.contains('paused')
   }
 
   /**
-	 * Toggles the auto slide mode on and off.
-	 *
-	 * @param {Boolean} [override] Flag which sets the desired state.
-	 * True means autoplay starts, false means it stops.
-	 */
+   * Toggles the auto slide mode on and off.
+   *
+   * @param {Boolean} [override] Flag which sets the desired state.
+   * True means autoplay starts, false means it stops.
+   */
 
-  function toggleAutoSlide (override) {
+  function toggleAutoSlide(override) {
     if (typeof override === 'boolean') {
       override ? resumeAutoSlide() : pauseAutoSlide()
     } else {
@@ -2576,26 +2621,26 @@
   }
 
   /**
-	 * Checks if the auto slide mode is currently on.
-	 *
-	 * @return {Boolean}
-	 */
-  function isAutoSliding () {
+   * Checks if the auto slide mode is currently on.
+   *
+   * @return {Boolean}
+   */
+  function isAutoSliding() {
     return !!(autoSlide && !autoSlidePaused)
   }
 
   /**
-	 * Steps from the current point in the presentation to the
-	 * slide which matches the specified horizontal and vertical
-	 * indices.
-	 *
-	 * @param {number} [h=indexh] Horizontal index of the target slide
-	 * @param {number} [v=indexv] Vertical index of the target slide
-	 * @param {number} [f] Index of a fragment within the
-	 * target slide to activate
-	 * @param {number} [o] Origin for use in multimaster environments
-	 */
-  function slide (h, v, f, o) {
+   * Steps from the current point in the presentation to the
+   * slide which matches the specified horizontal and vertical
+   * indices.
+   *
+   * @param {number} [h=indexh] Horizontal index of the target slide
+   * @param {number} [v=indexv] Vertical index of the target slide
+   * @param {number} [f] Index of a fragment within the
+   * target slide to activate
+   * @param {number} [o] Origin for use in multimaster environments
+   */
+  function slide(h, v, f, o) {
     // Remember where we were at before
     previousSlide = currentSlide
 
@@ -2654,7 +2699,7 @@
     }
 
     // Dispatch an event if the slide changed
-    var slideChanged = (indexh !== indexhBefore || indexv !== indexvBefore)
+    var slideChanged = indexh !== indexhBefore || indexv !== indexvBefore
     if (!slideChanged) {
       // Ensure that the previous slide is never the same as the current
       previousSlide = null
@@ -2672,7 +2717,8 @@
       if (dom.wrapper.querySelector(HOME_SLIDE_SELECTOR).classList.contains('present')) {
         // Launch async task
         setTimeout(function () {
-          var slides = toArray(dom.wrapper.querySelectorAll(HORIZONTAL_SLIDES_SELECTOR + '.stack')); var i
+          var slides = toArray(dom.wrapper.querySelectorAll(HORIZONTAL_SLIDES_SELECTOR + '.stack'))
+          var i
           for (i in slides) {
             if (slides[i]) {
               // Reset stack
@@ -2739,11 +2785,11 @@
   }
 
   /**
-	 * Syncs the presentation with the current DOM. Useful
-	 * when new slides or control elements are added or when
-	 * the configuration has changed.
-	 */
-  function sync () {
+   * Syncs the presentation with the current DOM. Useful
+   * when new slides or control elements are added or when
+   * the configuration has changed.
+   */
+  function sync() {
     // Subscribe to input
     removeEventListeners()
     addEventListeners()
@@ -2788,16 +2834,16 @@
   }
 
   /**
-	 * Updates reveal.js to keep in sync with new slide attributes. For
-	 * example, if you add a new `data-background-image` you can call
-	 * this to have reveal.js render the new background image.
-	 *
-	 * Similar to #sync() but more efficient when you only need to
-	 * refresh a specific slide.
-	 *
-	 * @param {HTMLElement} slide
-	 */
-  function syncSlide (slide) {
+   * Updates reveal.js to keep in sync with new slide attributes. For
+   * example, if you add a new `data-background-image` you can call
+   * this to have reveal.js render the new background image.
+   *
+   * Similar to #sync() but more efficient when you only need to
+   * refresh a specific slide.
+   *
+   * @param {HTMLElement} slide
+   */
+  function syncSlide(slide) {
     // Default to the current slide
     slide = slide || currentSlide
 
@@ -2811,14 +2857,14 @@
   }
 
   /**
-	 * Formats the fragments on the given slide so that they have
-	 * valid indices. Call this if fragments are changed in the DOM
-	 * after reveal.js has already initialized.
-	 *
-	 * @param {HTMLElement} slide
-	 * @return {Array} a list of the HTML fragments that were synced
-	 */
-  function syncFragments (slide) {
+   * Formats the fragments on the given slide so that they have
+   * valid indices. Call this if fragments are changed in the DOM
+   * after reveal.js has already initialized.
+   *
+   * @param {HTMLElement} slide
+   * @return {Array} a list of the HTML fragments that were synced
+   */
+  function syncFragments(slide) {
     // Default to the current slide
     slide = slide || currentSlide
 
@@ -2826,10 +2872,10 @@
   }
 
   /**
-	 * Resets all vertical slides so that only the first
-	 * is visible.
-	 */
-  function resetVerticalSlides () {
+   * Resets all vertical slides so that only the first
+   * is visible.
+   */
+  function resetVerticalSlides() {
     var horizontalSlides = toArray(dom.wrapper.querySelectorAll(HORIZONTAL_SLIDES_SELECTOR))
     horizontalSlides.forEach(function (horizontalSlide) {
       var verticalSlides = toArray(horizontalSlide.querySelectorAll('section'))
@@ -2845,10 +2891,10 @@
   }
 
   /**
-	 * Sorts and formats all of fragments in the
-	 * presentation.
-	 */
-  function sortAllFragments () {
+   * Sorts and formats all of fragments in the
+   * presentation.
+   */
+  function sortAllFragments() {
     var horizontalSlides = toArray(dom.wrapper.querySelectorAll(HORIZONTAL_SLIDES_SELECTOR))
     horizontalSlides.forEach(function (horizontalSlide) {
       var verticalSlides = toArray(horizontalSlide.querySelectorAll('section'))
@@ -2861,9 +2907,9 @@
   }
 
   /**
-	 * Randomly shuffles all slides in the deck.
-	 */
-  function shuffle () {
+   * Randomly shuffles all slides in the deck.
+   */
+  function shuffle() {
     var slides = toArray(dom.wrapper.querySelectorAll(HORIZONTAL_SLIDES_SELECTOR))
 
     slides.forEach(function (slide) {
@@ -2874,19 +2920,19 @@
   }
 
   /**
-	 * Updates one dimension of slides by showing the slide
-	 * with the specified index.
-	 *
-	 * @param {string} selector A CSS selector that will fetch
-	 * the group of slides we are working with
-	 * @param {number} index The index of the slide that should be
-	 * shown
-	 *
-	 * @return {number} The index of the slide that is now shown,
-	 * might differ from the passed in index if it was out of
-	 * bounds.
-	 */
-  function updateSlides (selector, index) {
+   * Updates one dimension of slides by showing the slide
+   * with the specified index.
+   *
+   * @param {string} selector A CSS selector that will fetch
+   * the group of slides we are working with
+   * @param {number} index The index of the slide that should be
+   * shown
+   *
+   * @return {number} The index of the slide that is now shown,
+   * might differ from the passed in index if it was out of
+   * bounds.
+   */
+  function updateSlides(selector, index) {
     // Select all slides and convert the NodeList result to
     // an array
     var slides = toArray(dom.wrapper.querySelectorAll(selector))
@@ -2977,10 +3023,10 @@
   }
 
   /**
-	 * Optimization method; hide all slides that are far away
-	 * from the present slide.
-	 */
-  function updateSlidesVisibility () {
+   * Optimization method; hide all slides that are far away
+   * from the present slide.
+   */
+  function updateSlidesVisibility() {
     // Select all slides and convert the NodeList result to
     // an array
     var horizontalSlides = toArray(dom.wrapper.querySelectorAll(HORIZONTAL_SLIDES_SELECTOR))
@@ -3059,24 +3105,24 @@
   }
 
   /**
-	 * Pick up notes from the current slide and display them
-	 * to the viewer.
-	 *
-	 * @see {@link config.showNotes}
-	 */
-  function updateNotes () {
+   * Pick up notes from the current slide and display them
+   * to the viewer.
+   *
+   * @see {@link config.showNotes}
+   */
+  function updateNotes() {
     if (config.showNotes && dom.speakerNotes && currentSlide && !isPrintingPDF()) {
       dom.speakerNotes.innerHTML = getSlideNotes() || '<span class="notes-placeholder">No notes on this slide.</span>'
     }
   }
 
   /**
-	 * Updates the visibility of the speaker notes sidebar that
-	 * is used to share annotated slides. The notes sidebar is
-	 * only visible if showNotes is true and there are notes on
-	 * one or more slides in the deck.
-	 */
-  function updateNotesVisibility () {
+   * Updates the visibility of the speaker notes sidebar that
+   * is used to share annotated slides. The notes sidebar is
+   * only visible if showNotes is true and there are notes on
+   * one or more slides in the deck.
+   */
+  function updateNotesVisibility() {
     if (config.showNotes && hasNotes()) {
       dom.wrapper.classList.add('show-notes')
     } else {
@@ -3085,17 +3131,17 @@
   }
 
   /**
-	 * Checks if there are speaker notes for ANY slide in the
-	 * presentation.
-	 */
-  function hasNotes () {
+   * Checks if there are speaker notes for ANY slide in the
+   * presentation.
+   */
+  function hasNotes() {
     return dom.slides.querySelectorAll('[data-notes], aside.notes').length > 0
   }
 
   /**
-	 * Updates the progress bar to reflect the current slide.
-	 */
-  function updateProgress () {
+   * Updates the progress bar to reflect the current slide.
+   */
+  function updateProgress() {
     // Update progress if enabled
     if (config.progress && dom.progressbar) {
       dom.progressbar.style.width = getProgress() * dom.wrapper.offsetWidth + 'px'
@@ -3103,9 +3149,9 @@
   }
 
   /**
-	 * Updates the slide number to match the current slide.
-	 */
-  function updateSlideNumber () {
+   * Updates the slide number to match the current slide.
+   */
+  function updateSlideNumber() {
     // Update slide number if enabled
     if (config.slideNumber && dom.slideNumber) {
       var value
@@ -3148,42 +3194,52 @@
   }
 
   /**
-	 * Applies HTML formatting to a slide number before it's
-	 * written to the DOM.
-	 *
-	 * @param {number} a Current slide
-	 * @param {string} delimiter Character to separate slide numbers
-	 * @param {(number|*)} b Total slides
-	 * @return {string} HTML string fragment
-	 */
-  function formatSlideNumber (a, delimiter, b) {
+   * Applies HTML formatting to a slide number before it's
+   * written to the DOM.
+   *
+   * @param {number} a Current slide
+   * @param {string} delimiter Character to separate slide numbers
+   * @param {(number|*)} b Total slides
+   * @return {string} HTML string fragment
+   */
+  function formatSlideNumber(a, delimiter, b) {
     var url = '#' + locationHash()
     if (typeof b === 'number' && !isNaN(b)) {
-      return '<a href="' + url + '">' +
-        '<span class="slide-number-a">' + a + '</span>' +
-        '<span class="slide-number-delimiter">' + delimiter + '</span>' +
-        '<span class="slide-number-b">' + b + '</span>' +
+      return (
+        '<a href="' +
+        url +
+        '">' +
+        '<span class="slide-number-a">' +
+        a +
+        '</span>' +
+        '<span class="slide-number-delimiter">' +
+        delimiter +
+        '</span>' +
+        '<span class="slide-number-b">' +
+        b +
+        '</span>' +
         '</a>'
+      )
     } else {
-      return '<a href="' + url + '">' +
-        '<span class="slide-number-a">' + a + '</span>' +
-        '</a>'
+      return '<a href="' + url + '">' + '<span class="slide-number-a">' + a + '</span>' + '</a>'
     }
   }
 
   /**
-	 * Updates the state of all control/navigation arrows.
-	 */
-  function updateControls () {
+   * Updates the state of all control/navigation arrows.
+   */
+  function updateControls() {
     var routes = availableRoutes()
     var fragments = availableFragments()
 
     // Remove the 'enabled' class from all directions
-    dom.controlsLeft.concat(dom.controlsRight)
+    dom.controlsLeft
+      .concat(dom.controlsRight)
       .concat(dom.controlsUp)
       .concat(dom.controlsDown)
       .concat(dom.controlsPrev)
-      .concat(dom.controlsNext).forEach(function (node) {
+      .concat(dom.controlsNext)
+      .forEach(function (node) {
         node.classList.remove('enabled')
         node.classList.remove('fragmented')
 
@@ -3192,29 +3248,77 @@
       })
 
     // Add the 'enabled' class to the available routes; remove 'disabled' attribute to enable buttons
-    if (routes.left) dom.controlsLeft.forEach(function (el) { el.classList.add('enabled'); el.removeAttribute('disabled') })
-    if (routes.right) dom.controlsRight.forEach(function (el) { el.classList.add('enabled'); el.removeAttribute('disabled') })
-    if (routes.up) dom.controlsUp.forEach(function (el) { el.classList.add('enabled'); el.removeAttribute('disabled') })
-    if (routes.down) dom.controlsDown.forEach(function (el) { el.classList.add('enabled'); el.removeAttribute('disabled') })
+    if (routes.left)
+      dom.controlsLeft.forEach(function (el) {
+        el.classList.add('enabled')
+        el.removeAttribute('disabled')
+      })
+    if (routes.right)
+      dom.controlsRight.forEach(function (el) {
+        el.classList.add('enabled')
+        el.removeAttribute('disabled')
+      })
+    if (routes.up)
+      dom.controlsUp.forEach(function (el) {
+        el.classList.add('enabled')
+        el.removeAttribute('disabled')
+      })
+    if (routes.down)
+      dom.controlsDown.forEach(function (el) {
+        el.classList.add('enabled')
+        el.removeAttribute('disabled')
+      })
 
     // Prev/next buttons
-    if (routes.left || routes.up) dom.controlsPrev.forEach(function (el) { el.classList.add('enabled'); el.removeAttribute('disabled') })
-    if (routes.right || routes.down) dom.controlsNext.forEach(function (el) { el.classList.add('enabled'); el.removeAttribute('disabled') })
+    if (routes.left || routes.up)
+      dom.controlsPrev.forEach(function (el) {
+        el.classList.add('enabled')
+        el.removeAttribute('disabled')
+      })
+    if (routes.right || routes.down)
+      dom.controlsNext.forEach(function (el) {
+        el.classList.add('enabled')
+        el.removeAttribute('disabled')
+      })
 
     // Highlight fragment directions
     if (currentSlide) {
       // Always apply fragment decorator to prev/next buttons
-      if (fragments.prev) dom.controlsPrev.forEach(function (el) { el.classList.add('fragmented', 'enabled'); el.removeAttribute('disabled') })
-      if (fragments.next) dom.controlsNext.forEach(function (el) { el.classList.add('fragmented', 'enabled'); el.removeAttribute('disabled') })
+      if (fragments.prev)
+        dom.controlsPrev.forEach(function (el) {
+          el.classList.add('fragmented', 'enabled')
+          el.removeAttribute('disabled')
+        })
+      if (fragments.next)
+        dom.controlsNext.forEach(function (el) {
+          el.classList.add('fragmented', 'enabled')
+          el.removeAttribute('disabled')
+        })
 
       // Apply fragment decorators to directional buttons based on
       // what slide axis they are in
       if (isVerticalSlide(currentSlide)) {
-        if (fragments.prev) dom.controlsUp.forEach(function (el) { el.classList.add('fragmented', 'enabled'); el.removeAttribute('disabled') })
-        if (fragments.next) dom.controlsDown.forEach(function (el) { el.classList.add('fragmented', 'enabled'); el.removeAttribute('disabled') })
+        if (fragments.prev)
+          dom.controlsUp.forEach(function (el) {
+            el.classList.add('fragmented', 'enabled')
+            el.removeAttribute('disabled')
+          })
+        if (fragments.next)
+          dom.controlsDown.forEach(function (el) {
+            el.classList.add('fragmented', 'enabled')
+            el.removeAttribute('disabled')
+          })
       } else {
-        if (fragments.prev) dom.controlsLeft.forEach(function (el) { el.classList.add('fragmented', 'enabled'); el.removeAttribute('disabled') })
-        if (fragments.next) dom.controlsRight.forEach(function (el) { el.classList.add('fragmented', 'enabled'); el.removeAttribute('disabled') })
+        if (fragments.prev)
+          dom.controlsLeft.forEach(function (el) {
+            el.classList.add('fragmented', 'enabled')
+            el.removeAttribute('disabled')
+          })
+        if (fragments.next)
+          dom.controlsRight.forEach(function (el) {
+            el.classList.add('fragmented', 'enabled')
+            el.removeAttribute('disabled')
+          })
       }
     }
 
@@ -3236,13 +3340,13 @@
   }
 
   /**
-	 * Updates the background elements to reflect the current
-	 * slide.
-	 *
-	 * @param {boolean} includeAll If true, the backgrounds of
-	 * all vertical slides (not just the present) will be updated.
-	 */
-  function updateBackground (includeAll) {
+   * Updates the background elements to reflect the current
+   * slide.
+   *
+   * @param {boolean} includeAll If true, the backgrounds of
+   * all vertical slides (not just the present) will be updated.
+   */
+  function updateBackground(includeAll) {
     var currentBackground = null
 
     // Reverse past/future classes when in RTL mode
@@ -3322,7 +3426,7 @@
     // If there's a background brightness flag for this slide,
     // bubble it to the .reveal container
     if (currentSlide) {
-      ['has-light-background', 'has-dark-background'].forEach(function (classToBubble) {
+      ;['has-light-background', 'has-dark-background'].forEach(function (classToBubble) {
         if (currentSlide.classList.contains(classToBubble)) {
           dom.wrapper.classList.add(classToBubble)
         } else {
@@ -3338,16 +3442,17 @@
   }
 
   /**
-	 * Updates the position of the parallax background based
-	 * on the current slide index.
-	 */
-  function updateParallax () {
+   * Updates the position of the parallax background based
+   * on the current slide index.
+   */
+  function updateParallax() {
     if (config.parallaxBackgroundImage) {
       var horizontalSlides = dom.wrapper.querySelectorAll(HORIZONTAL_SLIDES_SELECTOR)
       var verticalSlides = dom.wrapper.querySelectorAll(VERTICAL_SLIDES_SELECTOR)
 
       var backgroundSize = dom.background.style.backgroundSize.split(' ')
-      var backgroundWidth; var backgroundHeight
+      var backgroundWidth
+      var backgroundHeight
 
       if (backgroundSize.length === 1) {
         backgroundWidth = backgroundHeight = parseInt(backgroundSize[0], 10)
@@ -3387,12 +3492,12 @@
   }
 
   /**
-	 * Should the given element be preloaded?
-	 * Decides based on local element attributes and global config.
-	 *
-	 * @param {HTMLElement} element
-	 */
-  function shouldPreload (element) {
+   * Should the given element be preloaded?
+   * Decides based on local element attributes and global config.
+   *
+   * @param {HTMLElement} element
+   */
+  function shouldPreload(element) {
     // Prefer an explicit global preload setting
     var preload = config.preloadIframes
 
@@ -3406,13 +3511,13 @@
   }
 
   /**
-	 * Called when the given slide is within the configured view
-	 * distance. Shows the slide element and loads any content
-	 * that is set to load lazily (data-src).
-	 *
-	 * @param {HTMLElement} slide Slide to show
-	 */
-  function loadSlide (slide, options) {
+   * Called when the given slide is within the configured view
+   * distance. Shows the slide element and loads any content
+   * that is set to load lazily (data-src).
+   *
+   * @param {HTMLElement} slide Slide to show
+   */
+  function loadSlide(slide, options) {
     options = options || {}
 
     // Show the slide element
@@ -3521,12 +3626,12 @@
   }
 
   /**
-	 * Unloads and hides the given slide. This is called when the
-	 * slide is moved outside of the configured view distance.
-	 *
-	 * @param {HTMLElement} slide
-	 */
-  function unloadSlide (slide) {
+   * Unloads and hides the given slide. This is called when the
+   * slide is moved outside of the configured view distance.
+   *
+   * @param {HTMLElement} slide
+   */
+  function unloadSlide(slide) {
     // Hide the slide element
     slide.style.display = 'none'
 
@@ -3550,11 +3655,11 @@
   }
 
   /**
-	 * Determine what available routes there are for navigation.
-	 *
-	 * @return {{left: boolean, right: boolean, up: boolean, down: boolean}}
-	 */
-  function availableRoutes () {
+   * Determine what available routes there are for navigation.
+   *
+   * @return {{left: boolean, right: boolean, up: boolean, down: boolean}}
+   */
+  function availableRoutes() {
     var horizontalSlides = dom.wrapper.querySelectorAll(HORIZONTAL_SLIDES_SELECTOR)
     var verticalSlides = dom.wrapper.querySelectorAll(VERTICAL_SLIDES_SELECTOR)
 
@@ -3590,12 +3695,12 @@
   }
 
   /**
-	 * Returns an object describing the available fragment
-	 * directions.
-	 *
-	 * @return {{prev: boolean, next: boolean}}
-	 */
-  function availableFragments () {
+   * Returns an object describing the available fragment
+   * directions.
+   *
+   * @return {{prev: boolean, next: boolean}}
+   */
+  function availableFragments() {
     if (currentSlide && config.fragments) {
       var fragments = currentSlide.querySelectorAll('.fragment')
       var hiddenFragments = currentSlide.querySelectorAll('.fragment:not(.visible)')
@@ -3610,9 +3715,9 @@
   }
 
   /**
-	 * Enforces origin-specific format rules for embedded media.
-	 */
-  function formatEmbeddedContent () {
+   * Enforces origin-specific format rules for embedded media.
+   */
+  function formatEmbeddedContent() {
     var _appendParamToIframeSource = function (sourceAttribute, sourceURL, param) {
       toArray(dom.slides.querySelectorAll('iframe[' + sourceAttribute + '*="' + sourceURL + '"]')).forEach(function (el) {
         var src = el.getAttribute(sourceAttribute)
@@ -3632,12 +3737,12 @@
   }
 
   /**
-	 * Start playback of any embedded content inside of
-	 * the given element.
-	 *
-	 * @param {HTMLElement} element
-	 */
-  function startEmbeddedContent (element) {
+   * Start playback of any embedded content inside of
+   * the given element.
+   *
+   * @param {HTMLElement} element
+   */
+  function startEmbeddedContent(element) {
     if (element && !isSpeakerNotes()) {
       // Restart GIFs
       toArray(element.querySelectorAll('img[src$=".gif"]')).forEach(function (el) {
@@ -3717,12 +3822,12 @@
   }
 
   /**
-	 * Starts playing an embedded video/audio element after
-	 * it has finished loading.
-	 *
-	 * @param {object} event
-	 */
-  function startEmbeddedMedia (event) {
+   * Starts playing an embedded video/audio element after
+   * it has finished loading.
+   *
+   * @param {object} event
+   */
+  function startEmbeddedMedia(event) {
     var isAttachedToDOM = !!closestParent(event.target, 'html')
     var isVisible = !!closestParent(event.target, '.present')
 
@@ -3735,12 +3840,12 @@
   }
 
   /**
-	 * "Starts" the content of an embedded iframe using the
-	 * postMessage API.
-	 *
-	 * @param {object} event
-	 */
-  function startEmbeddedIframe (event) {
+   * "Starts" the content of an embedded iframe using the
+   * postMessage API.
+   *
+   * @param {object} event
+   */
+  function startEmbeddedIframe(event) {
     var iframe = event.target
 
     if (iframe && iframe.contentWindow) {
@@ -3774,16 +3879,19 @@
   }
 
   /**
-	 * Stop playback of any embedded content inside of
-	 * the targeted slide.
-	 *
-	 * @param {HTMLElement} element
-	 */
-  function stopEmbeddedContent (element, options) {
-    options = extend({
-      // Defaults
-      unloadIframes: true
-    }, options || {})
+   * Stop playback of any embedded content inside of
+   * the targeted slide.
+   *
+   * @param {HTMLElement} element
+   */
+  function stopEmbeddedContent(element, options) {
+    options = extend(
+      {
+        // Defaults
+        unloadIframes: true
+      },
+      options || {}
+    )
 
     if (element && element.parentNode) {
       // HTML5 media elements
@@ -3827,12 +3935,12 @@
   }
 
   /**
-	 * Returns the number of past slides. This can be used as a global
-	 * flattened index for slides.
-	 *
-	 * @return {number} Past slide count
-	 */
-  function getSlidePastCount () {
+   * Returns the number of past slides. This can be used as a global
+   * flattened index for slides.
+   *
+   * @return {number} Past slide count
+   */
+  function getSlidePastCount() {
     var horizontalSlides = toArray(dom.wrapper.querySelectorAll(HORIZONTAL_SLIDES_SELECTOR))
 
     // The number of past slides
@@ -3867,12 +3975,12 @@
   }
 
   /**
-	 * Returns a value ranging from 0-1 that represents
-	 * how far into the presentation we have navigated.
-	 *
-	 * @return {number}
-	 */
-  function getProgress () {
+   * Returns a value ranging from 0-1 that represents
+   * how far into the presentation we have navigated.
+   *
+   * @return {number}
+   */
+  function getProgress() {
     // The number of past and total slides
     var totalCount = getTotalSlides()
     var pastCount = getSlidePastCount()
@@ -3898,19 +4006,19 @@
   }
 
   /**
-	 * Checks if this presentation is running inside of the
-	 * speaker notes window.
-	 *
-	 * @return {boolean}
-	 */
-  function isSpeakerNotes () {
+   * Checks if this presentation is running inside of the
+   * speaker notes window.
+   *
+   * @return {boolean}
+   */
+  function isSpeakerNotes() {
     return !!window.location.search.match(/receiver/gi)
   }
 
   /**
-	 * Reads the current URL (hash) and navigates accordingly.
-	 */
-  function readURL () {
+   * Reads the current URL (hash) and navigates accordingly.
+   */
+  function readURL() {
     var hash = window.location.hash
 
     // Attempt to parse the hash as either an index or name
@@ -3925,7 +4033,7 @@
       // Ensure the named link is a valid HTML ID attribute
       try {
         element = document.getElementById(decodeURIComponent(name))
-      } catch (error) { }
+      } catch (error) {}
 
       // Ensure that we're not already on a slide with the same name
       var isSameNameAsCurrentSlide = currentSlide ? currentSlide.getAttribute('id') === name : false
@@ -3946,8 +4054,8 @@
       var hashIndexBase = config.hashOneBasedIndex ? 1 : 0
 
       // Read the index components of the hash
-      var h = (parseInt(bits[0], 10) - hashIndexBase) || 0
-      var v = (parseInt(bits[1], 10) - hashIndexBase) || 0
+      var h = parseInt(bits[0], 10) - hashIndexBase || 0
+      var v = parseInt(bits[1], 10) - hashIndexBase || 0
       var f
 
       if (config.fragmentInURL) {
@@ -3964,13 +4072,13 @@
   }
 
   /**
-	 * Updates the page URL (hash) to reflect the current
-	 * state.
-	 *
-	 * @param {number} delay The time in ms to wait before
-	 * writing the hash
-	 */
-  function writeURL (delay) {
+   * Updates the page URL (hash) to reflect the current
+   * state.
+   *
+   * @param {number} delay The time in ms to wait before
+   * writing the hash
+   */
+  function writeURL(delay) {
     // Make sure there's never more than one timeout running
     clearTimeout(writeURLTimeout)
 
@@ -3997,16 +4105,16 @@
     }
   }
   /**
-	 * Retrieves the h/v location and fragment of the current,
-	 * or specified, slide.
-	 *
-	 * @param {HTMLElement} [slide] If specified, the returned
-	 * index will be for this slide rather than the currently
-	 * active one
-	 *
-	 * @return {{h: number, v: number, f: number}}
-	 */
-  function getIndices (slide) {
+   * Retrieves the h/v location and fragment of the current,
+   * or specified, slide.
+   *
+   * @param {HTMLElement} [slide] If specified, the returned
+   * index will be for this slide rather than the currently
+   * active one
+   *
+   * @return {{h: number, v: number, f: number}}
+   */
+  function getIndices(slide) {
     // By default, return the current indices
     var h = indexh
     var v = indexv
@@ -4048,17 +4156,17 @@
   }
 
   /**
-	 * Retrieves all slides in this presentation.
-	 */
-  function getSlides () {
+   * Retrieves all slides in this presentation.
+   */
+  function getSlides() {
     return toArray(dom.wrapper.querySelectorAll(SLIDES_SELECTOR + ':not(.stack)'))
   }
 
   /**
-	 * Returns an array of objects where each object represents the
-	 * attributes on its respective slide.
-	 */
-  function getSlidesAttributes () {
+   * Returns an array of objects where each object represents the
+   * attributes on its respective slide.
+   */
+  function getSlidesAttributes() {
     return getSlides().map(function (slide) {
       var attributes = {}
       for (var i = 0; i < slide.attributes.length; i++) {
@@ -4070,20 +4178,20 @@
   }
 
   /**
-	 * Retrieves the total number of slides in this presentation.
-	 *
-	 * @return {number}
-	 */
-  function getTotalSlides () {
+   * Retrieves the total number of slides in this presentation.
+   *
+   * @return {number}
+   */
+  function getTotalSlides() {
     return getSlides().length
   }
 
   /**
-	 * Returns the slide element matching the specified index.
-	 *
-	 * @return {HTMLElement}
-	 */
-  function getSlide (x, y) {
+   * Returns the slide element matching the specified index.
+   *
+   * @return {HTMLElement}
+   */
+  function getSlide(x, y) {
     var horizontalSlide = dom.wrapper.querySelectorAll(HORIZONTAL_SLIDES_SELECTOR)[x]
     var verticalSlides = horizontalSlide && horizontalSlide.querySelectorAll('section')
 
@@ -4095,17 +4203,17 @@
   }
 
   /**
-	 * Returns the background element for the given slide.
-	 * All slides, even the ones with no background properties
-	 * defined, have a background element so as long as the
-	 * index is valid an element will be returned.
-	 *
-	 * @param {mixed} x Horizontal background index OR a slide
-	 * HTML element
-	 * @param {number} y Vertical background index
-	 * @return {(HTMLElement[]|*)}
-	 */
-  function getSlideBackground (x, y) {
+   * Returns the background element for the given slide.
+   * All slides, even the ones with no background properties
+   * defined, have a background element so as long as the
+   * index is valid an element will be returned.
+   *
+   * @param {mixed} x Horizontal background index OR a slide
+   * HTML element
+   * @param {number} y Vertical background index
+   * @return {(HTMLElement[]|*)}
+   */
+  function getSlideBackground(x, y) {
     var slide = typeof x === 'number' ? getSlide(x, y) : x
     if (slide) {
       return slide.slideBackgroundElement
@@ -4115,15 +4223,15 @@
   }
 
   /**
-	 * Retrieves the speaker notes from a slide. Notes can be
-	 * defined in two ways:
-	 * 1. As a data-notes attribute on the slide <section>
-	 * 2. As an <aside class="notes"> inside of the slide
-	 *
-	 * @param {HTMLElement} [slide=currentSlide]
-	 * @return {(string|null)}
-	 */
-  function getSlideNotes (slide) {
+   * Retrieves the speaker notes from a slide. Notes can be
+   * defined in two ways:
+   * 1. As a data-notes attribute on the slide <section>
+   * 2. As an <aside class="notes"> inside of the slide
+   *
+   * @param {HTMLElement} [slide=currentSlide]
+   * @return {(string|null)}
+   */
+  function getSlideNotes(slide) {
     // Default to the current slide
     slide = slide || currentSlide
 
@@ -4142,13 +4250,13 @@
   }
 
   /**
-	 * Retrieves the current state of the presentation as
-	 * an object. This state can then be restored at any
-	 * time.
-	 *
-	 * @return {{indexh: number, indexv: number, indexf: number, paused: boolean, overview: boolean}}
-	 */
-  function getState () {
+   * Retrieves the current state of the presentation as
+   * an object. This state can then be restored at any
+   * time.
+   *
+   * @return {{indexh: number, indexv: number, indexf: number, paused: boolean, overview: boolean}}
+   */
+  function getState() {
     var indices = getIndices()
 
     return {
@@ -4161,12 +4269,12 @@
   }
 
   /**
-	 * Restores the presentation to the given state.
-	 *
-	 * @param {object} state As generated by getState()
-	 * @see {@link getState} generates the parameter `state`
-	 */
-  function setState (state) {
+   * Restores the presentation to the given state.
+   *
+   * @param {object} state As generated by getState()
+   * @see {@link getState} generates the parameter `state`
+   */
+  function setState(state) {
     if (typeof state === 'object') {
       slide(deserialize(state.indexh), deserialize(state.indexv), deserialize(state.indexf))
 
@@ -4184,25 +4292,25 @@
   }
 
   /**
-	 * Return a sorted fragments list, ordered by an increasing
-	 * "data-fragment-index" attribute.
-	 *
-	 * Fragments will be revealed in the order that they are returned by
-	 * this function, so you can use the index attributes to control the
-	 * order of fragment appearance.
-	 *
-	 * To maintain a sensible default fragment order, fragments are presumed
-	 * to be passed in document order. This function adds a "fragment-index"
-	 * attribute to each node if such an attribute is not already present,
-	 * and sets that attribute to an integer value which is the position of
-	 * the fragment within the fragments list.
-	 *
-	 * @param {object[]|*} fragments
-	 * @param {boolean} grouped If true the returned array will contain
-	 * nested arrays for all fragments with the same index
-	 * @return {object[]} sorted Sorted array of fragments
-	 */
-  function sortFragments (fragments, grouped) {
+   * Return a sorted fragments list, ordered by an increasing
+   * "data-fragment-index" attribute.
+   *
+   * Fragments will be revealed in the order that they are returned by
+   * this function, so you can use the index attributes to control the
+   * order of fragment appearance.
+   *
+   * To maintain a sensible default fragment order, fragments are presumed
+   * to be passed in document order. This function adds a "fragment-index"
+   * attribute to each node if such an attribute is not already present,
+   * and sets that attribute to an integer value which is the position of
+   * the fragment within the fragments list.
+   *
+   * @param {object[]|*} fragments
+   * @param {boolean} grouped If true the returned array will contain
+   * nested arrays for all fragments with the same index
+   * @return {object[]} sorted Sorted array of fragments
+   */
+  function sortFragments(fragments, grouped) {
     fragments = toArray(fragments)
 
     var ordered = []
@@ -4247,16 +4355,16 @@
   }
 
   /**
-	 * Refreshes the fragments on the current slide so that they
-	 * have the appropriate classes (.visible + .current-fragment).
-	 *
-	 * @param {number} [index] The index of the current fragment
-	 * @param {array} [fragments] Array containing all fragments
-	 * in the current slide
-	 *
-	 * @return {{shown: array, hidden: array}}
-	 */
-  function updateFragments (index, fragments) {
+   * Refreshes the fragments on the current slide so that they
+   * have the appropriate classes (.visible + .current-fragment).
+   *
+   * @param {number} [index] The index of the current fragment
+   * @param {array} [fragments] Array containing all fragments
+   * in the current slide
+   *
+   * @return {{shown: array, hidden: array}}
+   */
+  function updateFragments(index, fragments) {
     var changedFragments = {
       shown: [],
       hidden: []
@@ -4306,17 +4414,17 @@
   }
 
   /**
-	 * Navigate to the specified slide fragment.
-	 *
-	 * @param {?number} index The index of the fragment that
-	 * should be shown, -1 means all are invisible
-	 * @param {number} offset Integer offset to apply to the
-	 * fragment index
-	 *
-	 * @return {boolean} true if a change was made in any
-	 * fragments visibility as part of this call
-	 */
-  function navigateFragment (index, offset) {
+   * Navigate to the specified slide fragment.
+   *
+   * @param {?number} index The index of the fragment that
+   * should be shown, -1 means all are invisible
+   * @param {number} offset Integer offset to apply to the
+   * fragment index
+   *
+   * @return {boolean} true if a change was made in any
+   * fragments visibility as part of this call
+   */
+  function navigateFragment(index, offset) {
     if (currentSlide && config.fragments) {
       var fragments = sortFragments(currentSlide.querySelectorAll('.fragment'))
       if (fragments.length) {
@@ -4361,29 +4469,29 @@
   }
 
   /**
-	 * Navigate to the next slide fragment.
-	 *
-	 * @return {boolean} true if there was a next fragment,
-	 * false otherwise
-	 */
-  function nextFragment () {
+   * Navigate to the next slide fragment.
+   *
+   * @return {boolean} true if there was a next fragment,
+   * false otherwise
+   */
+  function nextFragment() {
     return navigateFragment(null, 1)
   }
 
   /**
-	 * Navigate to the previous slide fragment.
-	 *
-	 * @return {boolean} true if there was a previous fragment,
-	 * false otherwise
-	 */
-  function previousFragment () {
+   * Navigate to the previous slide fragment.
+   *
+   * @return {boolean} true if there was a previous fragment,
+   * false otherwise
+   */
+  function previousFragment() {
     return navigateFragment(null, -1)
   }
 
   /**
-	 * Cues a new automated slide if enabled in the config.
-	 */
-  function cueAutoSlide () {
+   * Cues a new automated slide if enabled in the config.
+   */
+  function cueAutoSlide() {
     cancelAutoSlide()
 
     if (currentSlide && config.autoSlide !== false) {
@@ -4420,8 +4528,8 @@
       if (currentSlide.querySelectorAll('.fragment').length === 0) {
         toArray(currentSlide.querySelectorAll('video, audio')).forEach(function (el) {
           if (el.hasAttribute('data-autoplay')) {
-            if (autoSlide && (el.duration * 1000 / el.playbackRate) > autoSlide) {
-              autoSlide = (el.duration * 1000 / el.playbackRate) + 1000
+            if (autoSlide && (el.duration * 1000) / el.playbackRate > autoSlide) {
+              autoSlide = (el.duration * 1000) / el.playbackRate + 1000
             }
           }
         })
@@ -4456,14 +4564,14 @@
   }
 
   /**
-	 * Cancels any ongoing request to auto-slide.
-	 */
-  function cancelAutoSlide () {
+   * Cancels any ongoing request to auto-slide.
+   */
+  function cancelAutoSlide() {
     clearTimeout(autoSlideTimeout)
     autoSlideTimeout = -1
   }
 
-  function pauseAutoSlide () {
+  function pauseAutoSlide() {
     if (autoSlide && !autoSlidePaused) {
       autoSlidePaused = true
       dispatchEvent('autoslidepaused')
@@ -4475,7 +4583,7 @@
     }
   }
 
-  function resumeAutoSlide () {
+  function resumeAutoSlide() {
     if (autoSlide && autoSlidePaused) {
       autoSlidePaused = false
       dispatchEvent('autoslideresumed')
@@ -4483,7 +4591,7 @@
     }
   }
 
-  function navigateLeft () {
+  function navigateLeft() {
     // Reverse for RTL
     if (config.rtl) {
       if ((isOverview() || nextFragment() === false) && availableRoutes().left) {
@@ -4496,7 +4604,7 @@
     }
   }
 
-  function navigateRight () {
+  function navigateRight() {
     hasNavigatedRight = true
 
     // Reverse for RTL
@@ -4511,14 +4619,14 @@
     }
   }
 
-  function navigateUp () {
+  function navigateUp() {
     // Prioritize hiding fragments
     if ((isOverview() || previousFragment() === false) && availableRoutes().up) {
       slide(indexh, indexv - 1)
     }
   }
 
-  function navigateDown () {
+  function navigateDown() {
     hasNavigatedDown = true
 
     // Prioritize revealing fragments
@@ -4528,12 +4636,12 @@
   }
 
   /**
-	 * Navigates backwards, prioritized in the following order:
-	 * 1) Previous fragment
-	 * 2) Previous vertical slide
-	 * 3) Previous horizontal slide
-	 */
-  function navigatePrev () {
+   * Navigates backwards, prioritized in the following order:
+   * 1) Previous fragment
+   * 2) Previous vertical slide
+   * 3) Previous horizontal slide
+   */
+  function navigatePrev() {
     // Prioritize revealing fragments
     if (previousFragment() === false) {
       if (availableRoutes().up) {
@@ -4549,7 +4657,7 @@
         }
 
         if (previousSlide) {
-          var v = (previousSlide.querySelectorAll('section').length - 1) || undefined
+          var v = previousSlide.querySelectorAll('section').length - 1 || undefined
           var h = indexh - 1
           slide(h, v)
         }
@@ -4558,9 +4666,9 @@
   }
 
   /**
-	 * The reverse of #navigatePrev().
-	 */
-  function navigateNext () {
+   * The reverse of #navigatePrev().
+   */
+  function navigateNext() {
     hasNavigatedRight = true
     hasNavigatedDown = true
 
@@ -4586,10 +4694,10 @@
   }
 
   /**
-	 * Checks if the target element prevents the triggering of
-	 * swipe navigation.
-	 */
-  function isSwipePrevented (target) {
+   * Checks if the target element prevents the triggering of
+   * swipe navigation.
+   */
+  function isSwipePrevented(target) {
     while (target && typeof target.hasAttribute === 'function') {
       if (target.hasAttribute('data-prevent-swipe')) return true
       target = target.parentNode
@@ -4603,24 +4711,24 @@
   // --------------------------------------------------------------------//
 
   /**
-	 * Called by all event handlers that are based on user
-	 * input.
-	 *
-	 * @param {object} [event]
-	 */
-  function onUserInput (event) {
+   * Called by all event handlers that are based on user
+   * input.
+   *
+   * @param {object} [event]
+   */
+  function onUserInput(event) {
     if (config.autoSlideStoppable) {
       pauseAutoSlide()
     }
   }
 
   /**
-	 * Called whenever there is mouse input at the document level
-	 * to determine if the cursor is active or not.
-	 *
-	 * @param {object} event
-	 */
-  function onDocumentCursorActive (event) {
+   * Called whenever there is mouse input at the document level
+   * to determine if the cursor is active or not.
+   *
+   * @param {object} event
+   */
+  function onDocumentCursorActive(event) {
     showCursor()
 
     clearTimeout(cursorInactiveTimeout)
@@ -4629,11 +4737,11 @@
   }
 
   /**
-	 * Handler for the document level 'keypress' event.
-	 *
-	 * @param {object} event
-	 */
-  function onDocumentKeyPress (event) {
+   * Handler for the document level 'keypress' event.
+   *
+   * @param {object} event
+   */
+  function onDocumentKeyPress(event) {
     // Check if the pressed key is question mark
     if (event.shiftKey && event.charCode === 63) {
       toggleHelp()
@@ -4641,11 +4749,11 @@
   }
 
   /**
-	 * Handler for the document level 'keydown' event.
-	 *
-	 * @param {object} event
-	 */
-  function onDocumentKeyDown (event) {
+   * Handler for the document level 'keydown' event.
+   *
+   * @param {object} event
+   */
+  function onDocumentKeyDown(event) {
     // If there's a condition specified and it returns false,
     // ignore this event
     if (typeof config.keyboardCondition === 'function' && config.keyboardCondition(event) === false) {
@@ -4671,8 +4779,7 @@
     var lastSlideShortcut = (event.metaKey || event.ctrlKey) && keyCode === 39
 
     // Prevent all other events when a modifier is pressed
-    var unusedModifier = !prevSlideShortcut && !firstSlideShortcut && !lastSlideShortcut &&
-      (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey)
+    var unusedModifier = !prevSlideShortcut && !firstSlideShortcut && !lastSlideShortcut && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey)
 
     // Disregard the event if there's a focused element or a
     // keyboard modifier key is present
@@ -4848,12 +4955,12 @@
   }
 
   /**
-	 * Handler for the 'touchstart' event, enables support for
-	 * swipe and pinch gestures.
-	 *
-	 * @param {object} event
-	 */
-  function onTouchStart (event) {
+   * Handler for the 'touchstart' event, enables support for
+   * swipe and pinch gestures.
+   *
+   * @param {object} event
+   */
+  function onTouchStart(event) {
     if (isSwipePrevented(event.target)) return true
 
     touch.startX = event.touches[0].clientX
@@ -4862,11 +4969,11 @@
   }
 
   /**
-	 * Handler for the 'touchmove' event.
-	 *
-	 * @param {object} event
-	 */
-  function onTouchMove (event) {
+   * Handler for the 'touchmove' event.
+   *
+   * @param {object} event
+   */
+  function onTouchMove(event) {
     if (isSwipePrevented(event.target)) return true
 
     // Each touch should only trigger one action
@@ -4917,20 +5024,20 @@
   }
 
   /**
-	 * Handler for the 'touchend' event.
-	 *
-	 * @param {object} event
-	 */
-  function onTouchEnd (event) {
+   * Handler for the 'touchend' event.
+   *
+   * @param {object} event
+   */
+  function onTouchEnd(event) {
     touch.captured = false
   }
 
   /**
-	 * Convert pointer down to touch start.
-	 *
-	 * @param {object} event
-	 */
-  function onPointerDown (event) {
+   * Convert pointer down to touch start.
+   *
+   * @param {object} event
+   */
+  function onPointerDown(event) {
     if (event.pointerType === event.MSPOINTER_TYPE_TOUCH || event.pointerType === 'touch') {
       event.touches = [{ clientX: event.clientX, clientY: event.clientY }]
       onTouchStart(event)
@@ -4938,11 +5045,11 @@
   }
 
   /**
-	 * Convert pointer move to touch move.
-	 *
-	 * @param {object} event
-	 */
-  function onPointerMove (event) {
+   * Convert pointer move to touch move.
+   *
+   * @param {object} event
+   */
+  function onPointerMove(event) {
     if (event.pointerType === event.MSPOINTER_TYPE_TOUCH || event.pointerType === 'touch') {
       event.touches = [{ clientX: event.clientX, clientY: event.clientY }]
       onTouchMove(event)
@@ -4950,11 +5057,11 @@
   }
 
   /**
-	 * Convert pointer up to touch end.
-	 *
-	 * @param {object} event
-	 */
-  function onPointerUp (event) {
+   * Convert pointer up to touch end.
+   *
+   * @param {object} event
+   */
+  function onPointerUp(event) {
     if (event.pointerType === event.MSPOINTER_TYPE_TOUCH || event.pointerType === 'touch') {
       event.touches = [{ clientX: event.clientX, clientY: event.clientY }]
       onTouchEnd(event)
@@ -4962,12 +5069,12 @@
   }
 
   /**
-	 * Handles mouse wheel scrolling, throttled to avoid skipping
-	 * multiple slides.
-	 *
-	 * @param {object} event
-	 */
-  function onDocumentMouseScroll (event) {
+   * Handles mouse wheel scrolling, throttled to avoid skipping
+   * multiple slides.
+   *
+   * @param {object} event
+   */
+  function onDocumentMouseScroll(event) {
     if (Date.now() - lastMouseWheelStep > 600) {
       lastMouseWheelStep = Date.now()
 
@@ -4981,14 +5088,14 @@
   }
 
   /**
-	 * Clicking on the progress bar results in a navigation to the
-	 * closest approximate horizontal slide using this equation:
-	 *
-	 * ( clickX / presentationWidth ) * numberOfSlides
-	 *
-	 * @param {object} event
-	 */
-  function onProgressClicked (event) {
+   * Clicking on the progress bar results in a navigation to the
+   * closest approximate horizontal slide using this equation:
+   *
+   * ( clickX / presentationWidth ) * numberOfSlides
+   *
+   * @param {object} event
+   */
+  function onProgressClicked(event) {
     onUserInput(event)
 
     event.preventDefault()
@@ -5004,42 +5111,64 @@
   }
 
   /**
-	 * Event handler for navigation control buttons.
-	 */
-  function onNavigateLeftClicked (event) { event.preventDefault(); onUserInput(); config.navigationMode === 'linear' ? navigatePrev() : navigateLeft() }
-  function onNavigateRightClicked (event) { event.preventDefault(); onUserInput(); config.navigationMode === 'linear' ? navigateNext() : navigateRight() }
-  function onNavigateUpClicked (event) { event.preventDefault(); onUserInput(); navigateUp() }
-  function onNavigateDownClicked (event) { event.preventDefault(); onUserInput(); navigateDown() }
-  function onNavigatePrevClicked (event) { event.preventDefault(); onUserInput(); navigatePrev() }
-  function onNavigateNextClicked (event) { event.preventDefault(); onUserInput(); navigateNext() }
+   * Event handler for navigation control buttons.
+   */
+  function onNavigateLeftClicked(event) {
+    event.preventDefault()
+    onUserInput()
+    config.navigationMode === 'linear' ? navigatePrev() : navigateLeft()
+  }
+  function onNavigateRightClicked(event) {
+    event.preventDefault()
+    onUserInput()
+    config.navigationMode === 'linear' ? navigateNext() : navigateRight()
+  }
+  function onNavigateUpClicked(event) {
+    event.preventDefault()
+    onUserInput()
+    navigateUp()
+  }
+  function onNavigateDownClicked(event) {
+    event.preventDefault()
+    onUserInput()
+    navigateDown()
+  }
+  function onNavigatePrevClicked(event) {
+    event.preventDefault()
+    onUserInput()
+    navigatePrev()
+  }
+  function onNavigateNextClicked(event) {
+    event.preventDefault()
+    onUserInput()
+    navigateNext()
+  }
 
   /**
-	 * Handler for the window level 'hashchange' event.
-	 *
-	 * @param {object} [event]
-	 */
-  function onWindowHashChange (event) {
+   * Handler for the window level 'hashchange' event.
+   *
+   * @param {object} [event]
+   */
+  function onWindowHashChange(event) {
     readURL()
   }
 
   /**
-	 * Handler for the window level 'resize' event.
-	 *
-	 * @param {object} [event]
-	 */
-  function onWindowResize (event) {
+   * Handler for the window level 'resize' event.
+   *
+   * @param {object} [event]
+   */
+  function onWindowResize(event) {
     layout()
   }
 
   /**
-	 * Handle for the window level 'visibilitychange' event.
-	 *
-	 * @param {object} [event]
-	 */
-  function onPageVisibilityChange (event) {
-    var isHidden = document.webkitHidden ||
-      document.msHidden ||
-      document.hidden
+   * Handle for the window level 'visibilitychange' event.
+   *
+   * @param {object} [event]
+   */
+  function onPageVisibilityChange(event) {
+    var isHidden = document.webkitHidden || document.msHidden || document.hidden
 
     // If, after clicking a link or similar and we're coming back,
     // focus the document.body to ensure we can use keyboard shortcuts
@@ -5053,11 +5182,11 @@
   }
 
   /**
-	 * Invoked when a slide is and we're in the overview.
-	 *
-	 * @param {object} event
-	 */
-  function onOverviewSlideClicked (event) {
+   * Invoked when a slide is and we're in the overview.
+   *
+   * @param {object} event
+   */
+  function onOverviewSlideClicked(event) {
     // TODO There's a bug here where the event listeners are not
     // removed after deactivating the overview.
     if (eventsAreBound && isOverview()) {
@@ -5083,12 +5212,12 @@
   }
 
   /**
-	 * Handles clicks on links that are set to preview in the
-	 * iframe overlay.
-	 *
-	 * @param {object} event
-	 */
-  function onPreviewLinkClicked (event) {
+   * Handles clicks on links that are set to preview in the
+   * iframe overlay.
+   *
+   * @param {object} event
+   */
+  function onPreviewLinkClicked(event) {
     if (event.currentTarget && event.currentTarget.hasAttribute('href')) {
       var url = event.currentTarget.getAttribute('href')
       if (url) {
@@ -5099,11 +5228,11 @@
   }
 
   /**
-	 * Handles click on the auto-sliding controls element.
-	 *
-	 * @param {object} [event]
-	 */
-  function onAutoSlidePlayerClick (event) {
+   * Handles click on the auto-sliding controls element.
+   *
+   * @param {object} [event]
+   */
+  function onAutoSlidePlayerClick(event) {
     // Replay
     if (Reveal.isLastSlide() && config.loop === false) {
       slide(0, 0)
@@ -5124,16 +5253,16 @@
   // --------------------------------------------------------------------//
 
   /**
-	 * Constructor for the playback component, which displays
-	 * play/pause/progress controls.
-	 *
-	 * @param {HTMLElement} container The component will append
-	 * itself to this
-	 * @param {function} progressCheck A method which will be
-	 * called frequently to get the current progress on a range
-	 * of 0-1
-	 */
-  function Playback (container, progressCheck) {
+   * Constructor for the playback component, which displays
+   * play/pause/progress controls.
+   *
+   * @param {HTMLElement} container The component will append
+   * itself to this
+   * @param {function} progressCheck A method which will be
+   * called frequently to get the current progress on a range
+   * of 0-1
+   */
+  function Playback(container, progressCheck) {
     // Cosmetics
     this.diameter = 100
     this.diameter2 = this.diameter / 2
@@ -5165,8 +5294,8 @@
   }
 
   /**
-	 * @param value
-	 */
+   * @param value
+   */
   Playback.prototype.setPlaying = function (value) {
     var wasPlaying = this.playing
 
@@ -5199,11 +5328,11 @@
   }
 
   /**
-	 * Renders the current progress and playback state.
-	 */
+   * Renders the current progress and playback state.
+   */
   Playback.prototype.render = function () {
     var progress = this.playing ? this.progress : 0
-    var radius = (this.diameter2) - this.thickness
+    var radius = this.diameter2 - this.thickness
     var x = this.diameter2
     var y = this.diameter2
     var iconSize = 28
@@ -5211,8 +5340,8 @@
     // Ease towards 1
     this.progressOffset += (1 - this.progressOffset) * 0.1
 
-    var endAngle = (-Math.PI / 2) + (progress * (Math.PI * 2))
-    var startAngle = (-Math.PI / 2) + (this.progressOffset * (Math.PI * 2))
+    var endAngle = -Math.PI / 2 + progress * (Math.PI * 2)
+    var startAngle = -Math.PI / 2 + this.progressOffset * (Math.PI * 2)
 
     this.context.save()
     this.context.clearRect(0, 0, this.diameter, this.diameter)
@@ -5239,7 +5368,7 @@
       this.context.stroke()
     }
 
-    this.context.translate(x - (iconSize / 2), y - (iconSize / 2))
+    this.context.translate(x - iconSize / 2, y - iconSize / 2)
 
     // Draw play/pause icons
     if (this.playing) {
@@ -5432,7 +5561,7 @@
 
     // Returns true if we're currently on the first slide
     isFirstSlide: function () {
-      return (indexh === 0 && indexv === 0)
+      return indexh === 0 && indexv === 0
     },
 
     // Returns true if we're currently on the last slide
@@ -5501,4 +5630,4 @@
   }
 
   return Reveal
-}))
+})

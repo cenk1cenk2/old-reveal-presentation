@@ -20,10 +20,9 @@
 }
 
 @mixin clearfix() {
-
   &:before,
   &:after {
-    content: " "; // 1
+    content: ' '; // 1
     display: table; // 2
   }
 
@@ -31,7 +30,6 @@
     clear: both;
   }
 }
-
 
 // Transitions
 @mixin transition($transition) {
@@ -49,16 +47,16 @@
   p,
   .push,
   .block,
-  .items-push>div {
+  .items-push > div {
     margin-bottom: $y;
   }
 
-  .items-push-2x>div {
-    margin-bottom: ($y*2);
+  .items-push-2x > div {
+    margin-bottom: ($y * 2);
   }
 
-  .items-push-3x>div {
-    margin-bottom: ($y*3);
+  .items-push-3x > div {
+    margin-bottom: ($y * 3);
   }
 
   &-full {

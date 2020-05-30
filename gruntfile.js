@@ -1,22 +1,19 @@
 const sass = require('node-sass')
 
-module.exports = grunt => {
+module.exports = (grunt) => {
   require('load-grunt-tasks')(grunt)
 
   const hostname = grunt.option('hostname') || '192.168.10.7'
   const port = grunt.option('port') || 8015
   let root = grunt.option('root') || '.'
 
-  if (!Array.isArray(root)) root = [root]
+  if (!Array.isArray(root)) root = [ root ]
 
   // Project configuration
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     meta: {
-      banner:
-        '/*!\n' +
-        ' * CENK KILIC PRESENTATION WITH REVEAL JS(<%= grunt.template.today("yyyy-mm-dd, HH:MM") %>)\n' +
-        ' */'
+      banner: '/*!\n' + ' * CENK KILIC PRESENTATION WITH REVEAL JS(<%= grunt.template.today("yyyy-mm-dd, HH:MM") %>)\n' + ' */'
     },
 
     // uglify: {
@@ -26,8 +23,8 @@ module.exports = grunt => {
       options: { ecma: 2015 },
       main: {
         files: [
-          { src: ['js/lib/*.js', 'js/jquery.min.js', 'js/reveal.js', 'js/app.js'], dest: 'dist/js/base.min.js' },
-          { src: ['js/include.js'], dest: 'dist/js/include.min.js' }
+          { src: [ 'js/lib/*.js', 'js/jquery.min.js', 'js/reveal.js', 'js/app.js' ], dest: 'dist/js/base.min.js' },
+          { src: [ 'js/include.js' ], dest: 'dist/js/include.min.js' }
         ]
       }
     },
@@ -40,14 +37,14 @@ module.exports = grunt => {
       base: {
         expand: true,
         cwd: 'css/theme/base/source',
-        src: ['*.sass', '*.scss'],
+        src: [ '*.sass', '*.scss' ],
         dest: 'dist/css/base',
         ext: '.css'
       },
       extend: {
         expand: true,
         cwd: 'css/theme/extend/source',
-        src: ['*.sass', '*.scss'],
+        src: [ '*.sass', '*.scss' ],
         dest: 'dist/css/extend',
         ext: '.css'
       }
@@ -58,22 +55,26 @@ module.exports = grunt => {
         compatibility: 'ie9'
       },
       css: {
-        files: [{
-          expand: true,
-          flatten: true,
-          cwd: 'css',
-          src: ['*.css', '!*.min.css'],
-          dest: 'dist/css',
-          ext: '.min.css'
-        }],
-        print: [{
-          expand: true,
-          flatten: true,
-          cwd: 'css/print',
-          src: ['*.css', '!*.min.css'],
-          dest: 'dist/css',
-          ext: '.min.css'
-        }]
+        files: [
+          {
+            expand: true,
+            flatten: true,
+            cwd: 'css',
+            src: [ '*.css', '!*.min.css' ],
+            dest: 'dist/css',
+            ext: '.min.css'
+          }
+        ],
+        print: [
+          {
+            expand: true,
+            flatten: true,
+            cwd: 'css/print',
+            src: [ '*.css', '!*.min.css' ],
+            dest: 'dist/css',
+            ext: '.min.css'
+          }
+        ]
       },
       fonts: {
         files: [
@@ -117,14 +118,14 @@ module.exports = grunt => {
     },
 
     clean: {
-      scss: ['dist/css/base', 'dist/css/extend']
+      scss: [ 'dist/css/base', 'dist/css/extend' ]
     },
 
     connect: {
       server: {
         options: {
-          hostname: hostname,
-          port: port,
+          hostname,
+          port,
           base: root,
           livereload: true,
           open: true,
@@ -135,48 +136,35 @@ module.exports = grunt => {
 
     zip: {
       bundle: {
-        src: [
-          'dist/**',
-          'slides/**',
-          'template/**',
-          '.gitignore',
-          'favicon.png',
-          'gruntfile.js',
-          'README.md',
-          'index.html',
-          'package.json'
-        ],
+        src: [ 'dist/**', 'slides/**', 'template/**', '.gitignore', 'favicon.png', 'gruntfile.js', 'README.md', 'index.html', 'package.json' ],
         dest: 'bundle.zip'
       }
     },
 
     watch: {
       js: {
-        files: ['gruntfile.js', 'js/**/*.js', 'slides/js/**/*.js'],
+        files: [ 'gruntfile.js', 'js/**/*.js', 'slides/js/**/*.js' ],
         tasks: 'js'
       },
       scss: {
-        files: [
-          'css/theme/**/*.scss',
-        ],
+        files: [ 'css/theme/**/*.scss' ],
         tasks: 'scss'
       },
       css: {
-        files: ['css/**/*.css'],
+        files: [ 'css/**/*.css' ],
         tasks: 'css'
       },
       html: {
-        files: [root.map(path => path + '/*.html'), root.map(path => path + '/template/*.html'), root.map(path => path + '/slides/*.html')]
+        files: [ root.map((path) => path + '/*.html'), root.map((path) => path + '/template/*.html'), root.map((path) => path + '/slides/*.html') ]
       },
       markdown: {
-        files: root.map(path => path + '/slides/*.md')
+        files: root.map((path) => path + '/slides/*.md')
       },
       options: {
         livereload: true,
         debounceDelay: 2000
       }
     }
-
   })
 
   grunt.loadNpmTasks('grunt-contrib-clean')
@@ -191,24 +179,24 @@ module.exports = grunt => {
   grunt.loadNpmTasks('grunt-contrib-copy')
 
   // Default task
-  grunt.registerTask('default', ['js', 'scss', 'css', 'fonts', 'assets'])
+  grunt.registerTask('default', [ 'js', 'scss', 'css', 'fonts', 'assets' ])
 
   // JS task
-  grunt.registerTask('js', ['terser'])
+  grunt.registerTask('js', [ 'terser' ])
 
   // Fonts
-  grunt.registerTask('fonts', ['cssmin:fonts', 'copy:fonts'])
+  grunt.registerTask('fonts', [ 'cssmin:fonts', 'copy:fonts' ])
 
   // Assets
-  grunt.registerTask('assets', ['copy:images', 'copy:plugins'])
+  grunt.registerTask('assets', [ 'copy:images', 'copy:plugins' ])
 
   // Theme CSS
-  grunt.registerTask('scss', ['sass', 'cssmin:scss', 'clean:scss'])
-  grunt.registerTask('css', ['cssmin:css'])
+  grunt.registerTask('scss', [ 'sass', 'cssmin:scss', 'clean:scss' ])
+  grunt.registerTask('css', [ 'cssmin:css' ])
 
   // Package presentation to archive
-  grunt.registerTask('package', ['default', 'zip'])
+  grunt.registerTask('package', [ 'default', 'zip' ])
 
   // Serve presentation locally
-  grunt.registerTask('serve', ['default', 'connect', 'watch'])
+  grunt.registerTask('serve', [ 'default', 'connect', 'watch' ])
 }
