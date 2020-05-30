@@ -1,0 +1,6 @@
+dist/
+fonts/
+js/lib/
+js/plugins/
+node_modules/
+.vscode/

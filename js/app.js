@@ -1,6 +1,5 @@
 const ANIMATE_DELAY = 400
 $(document).ready(() => {
-
   // Initialize Reveal.js
   Reveal.initialize({
     width: '1920',
@@ -14,17 +13,21 @@ $(document).ready(() => {
     navigationMode: 'linear',
     transition: 'linear',
     dependencies: [
+      {
+        src: 'dist/js/plugins/external-section/external-section.js',
+        condition () {
+          return !!document.querySelector('[data-external]')
+        }
+      },
       { src: 'dist/js/plugins/markdown/marked.js' },
       { src: 'dist/js/plugins/markdown/markdown.js' },
       { src: 'dist/js/plugins/notes/notes.js', async: true },
       { src: 'dist/js/plugins/zoom-js/zoom.js', async: true },
-      { src: 'dist/js/plugins/highlight/highlight.js', async: true },
-      { src: 'dist/js/plugins/external-section/external-section.js', condition: function () { return !!document.querySelector('[data-external]') } }
-
+      { src: 'dist/js/plugins/highlight/highlight.js', async: true }
     ],
     keyboard: {
       // enable auto slide with space
-      32: function () {
+      32 () {
         Reveal.toggleAutoSlide(true)
       }
     }
@@ -51,11 +54,12 @@ $(document).ready(() => {
     animateContent(event)
     checktimeline()
     headerVisibility()
+    slideName(event)
   })
 
   // Binds event to the next buttons on each slide
-  $('.nextButton a').on('click', e => {
-    const goto = parseInt($(e.target).attr('actual-slide')) + 1
+  $('.nextButton a').on('click', (e) => {
+    const goto = parseInt($(e.target).attr('actual-slide'), 10) + 1
     Reveal.slide(goto, 0)
     e.preventDefault()
     return false
@@ -64,7 +68,7 @@ $(document).ready(() => {
   // Hide Header on the first and last slide
   function headerVisibility () {
     const slide = Reveal.getIndices().h
-    if (slide === 0 || slide === totalSlides) {
+    if (slide === 0 || slide === totalSlides - 1) {
       $('#header').hide()
     } else {
       $('#header').show()
@@ -72,9 +76,16 @@ $(document).ready(() => {
   }
 
   // Get all slidenames by section
-  const slideNames = $('section').map((i, obj) => {
-    return $(obj).attr('slide-name-data')
-  }).get()
+  const slideNames = $('section')
+    .map((i, obj) => {
+      return $(obj).attr('slide-name-data')
+    })
+    .get()
+
+  // add slide name to top
+  function slideName (event) {
+    $('#slide-title').html(String(slideNames[event.indexh]).toUpperCase())
+  }
 
   // Create Direct Navigation to Slides
   for (let i = 0; i < totalSlides; i++) {
@@ -82,25 +93,27 @@ $(document).ready(() => {
   }
 
   // Navigate to Slide with Navigation Menu Click
-  $('#timeline ul li a').on('click', e => {
-    Reveal.slide(parseInt($(e.target).attr('go-to-data')))
+  $('#timeline ul li a').on('click', (e) => {
+    Reveal.slide(parseInt($(e.target).attr('go-to-data'), 10))
     e.preventDefault()
     return false
   })
 
   // Write Slidenumber over navigation
-  $('#timeline ul li a').on('mouseover', e => {
-    $('#pointTT > p.name').text($(e.target).attr('slide-name-data') === 'undefined' ? `Slide No: ${$(e.target).attr('go-to-data')}` : $(e.target).attr('slide-name-data'))
+  $('#timeline ul li a').on('mouseover', (e) => {
+    $('#pointTT > p.name').text(
+      $(e.target).attr('slide-name-data') === 'undefined' ? `Slide No: ${$(e.target).attr('go-to-data')}` : String($(e.target).attr('slide-name-data')).toUpperCase()
+    )
     $('#pointTT').show()
     $('#pointTT').css({
-      left: ($(e.target).offset().left + 5 - $('#pointTT').width() / 2) + 'px',
-      top: ($(e.target).offset().top - 34) + 'px'
+      left: $(e.target).offset().left + 5 - $('#pointTT').width() / 2 + 'px',
+      top: $(e.target).offset().top - 34 + 'px'
     })
     e.preventDefault()
     return false
   })
 
-  $('#timeline ul li a').on('mouseout', e => {
+  $('#timeline ul li a').on('mouseout', (e) => {
     $('#pointTT').hide()
     e.preventDefault()
     return false
@@ -109,14 +122,20 @@ $(document).ready(() => {
   // Animate and position the content when loading a new slide
   function animateContent (event) {
     // $(event.currentSlide).find('.content').css('top', document.body.clientHeight / 2 - ($(event.currentSlide).find('.content').height() / 2))
-    if ((event.indexh) > 0) {
+    if (event.indexh > 0) {
       $(event.currentSlide).find('.animate-content').delay(ANIMATE_DELAY).animate({ opacity: 1 }, 1000)
       $(event.currentSlide).find('.nextButton').delay(ANIMATE_DELAY).animate({ opacity: 1 }, 1000)
     } else {
       $(event.currentSlide).find('.nextButton').delay(ANIMATE_DELAY).animate({ opacity: 1 }, 1000)
     }
-    $(event.previousSlide).find('.animate-content').delay(ANIMATE_DELAY * 2).animate({ opacity: 0 }, 100)
-    $(event.previousSlide).find('.nextButton').delay(ANIMATE_DELAY * 2).animate({ opacity: 0 }, 100)
+    $(event.previousSlide)
+      .find('.animate-content')
+      .delay(ANIMATE_DELAY * 2)
+      .animate({ opacity: 0 }, 100)
+    $(event.previousSlide)
+      .find('.nextButton')
+      .delay(ANIMATE_DELAY * 2)
+      .animate({ opacity: 0 }, 100)
   }
 
   function checktimeline () {
