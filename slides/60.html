@@ -1,0 +1,36 @@
+<div class="row fragment fade-up" data-autoslide="750">
+  <h2 class="fragment highlight-green" data-autoslide="750">Future Work</h2>
+</div>
+<div class="row">
+  <div class="col-4 align-self-center fragment fade-up" data-autoslide="750">
+    <div class="row">
+      <img class="border-frame" src="./slides/assets/60/img1.png" />
+      <p class="fragment highlight-green" data-autoslide="750">This proof-of-concept will be the base for my next open-source project.</p>
+    </div>
+  </div>
+  <div class="col align-self-center">
+    <p class="fragment fade-up" data-autoslide="750">A command line interface that is working with a plugin based microservice architecture.</p>
+    <ul>
+      <li class="fragment fade-up" data-autoslide="750">Control and monitor remote servers.</li>
+      <li class="fragment fade-up" data-autoslide="750">Control and monitor Docker containers.</li>
+      <li class="fragment fade-up" data-autoslide="750">Deploy Docker containers to remote servers utilizing Ansible.</li>
+      <li class="fragment fade-up" data-autoslide="750">Manage all servers in a central location.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- STOP THE ANIMATIONS -->
+<span class="fragment" data-autoslide-stop></span>
+<!-- STOP THE ANIMATIONS -->
+<aside class="notes">
+  <p>This proof of concept will be utilized as a base for my next open source project.</p>
+  <p>I know aim to cut down on modularity and create a new version for my CLI interface where it can monitor docker related stuff as well as the server itself.</p>
+  <p>This application will consist of 3 main parts which are the CLI itself, frontend-backend and a daemon.</p>
+  <p>While CLI can be used independently it can be further expanded with the frontend-backend configuration to enable remote control over web.</p>
+  <p>Multiple daemons from multiple servers can connect through a message queue to extend this feature over many servers.</p>
+  <p>With the addition of Ansible this CLI can also be used to deploy containers have consistency between servers, which will come at the next step.</p>
+  <p>
+    There is already a popular application called portainer which achieves a similar thing but the pitfall here is it is more of a web interface docker which you have to utilize
+    through web, while this one is aimed to be a supplementary to your local configuration only.
+  </p>
+</aside>

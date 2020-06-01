@@ -1,0 +1,54 @@
+<div class="row fragment fade-up" data-autoslide="750">
+  <h2 class="fragment highlight-green" data-autoslide="750">Proof-of-Concept</h2>
+</div>
+<div class="row">
+  <div class="col align-self-center fragment fade-up" data-autoslide="750">
+    <div class="row">
+      <img class="border-frame" src="./slides/assets/50/frontend.png" />
+    </div>
+  </div>
+  <div class="col align-self-center fragment fade-up" data-autoslide="750">
+    <div class="row">
+      <img class="border-frame" src="./slides/assets/50/backend.png" />
+    </div>
+  </div>
+</div>
+
+<!-- STOP THE ANIMATIONS -->
+<span class="fragment" data-autoslide-stop></span>
+<!-- STOP THE ANIMATIONS -->
+<aside class="notes">
+  <p>
+    With the proof-of-concept application, I aimed to create a blank-slate framework for mostly servers and IOT devices but like i told since it is intended to be a blank slate, it
+    can be used for anything with a dashbord like interface.
+  </p>
+  <p>
+    Application consists of seperated frontend and backends both written in typescript, nothing new there. For frontend it utilized Next.js framework which is the server-side
+    rendered version of React and for backend it utilized Nest.js framework.
+  </p>
+  <p>
+    The idea was to create a blank slate framework, which handles authentication and basic scaffolding for the user interface but can be expanded through adding more microservices.
+    Backend services can be expanded in form of docker containers, while frontend can be expanded via plugins passed in to frontend container as environment variables to install
+    node.js modules.
+  </p>
+  <p>
+    The different approach here was rather than creating a static microservices application, creating a framework that is able to handle any compatible plugins. It does not know
+    about what plugins may or may not be installed and that is what makes it totally modular.
+  </p>
+  <p>
+    For backend plugins it has internal handling of registration and health check of the plugins. And any of these plugins can be hosted in an other local network while they only
+    need to communicate through the message queue and a internal network for apollo federation. Backend plugins utilize GraphQL since it gives enough flexibility to create modular
+    endpoint API, while some parts of it is RESTFUL like the plugin querying and authentication.
+  </p>
+  <p>
+    For frontend this was a different story. Although microfrontends is a thing at the moment, the intended result is bundle them whole together and serve them through the same
+    server. With the modular approach frontend plugins come in the way of modules where they will be installed through node package registry with passing an environment variable to
+    the frontend docker container. Although with the help of typescript which supports dynamic on demand imports which is utilized to import the plugin packages with global regex
+    patterns, the performance as disclosed in the paper itself was not up to the task and we were giving up so much to obtain this modularity.
+  </p>
+  <p>
+    During this experiment, I had the chance to mock some benchmarks between monolithic and microservices for this exact application since I initially started writing this
+    application as monolithic. So the overheads and comparison with state-of-the-art previous work with utilizing benchmarks using RESTFUL and GraphQL api services, utilizing a
+    microservice architecture, message broker delays in microservices applications as well as benchmarking popular frontends which could be a candidate for this project.
+  </p>
+</aside>
