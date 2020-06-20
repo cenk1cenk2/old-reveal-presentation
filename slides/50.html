@@ -1,15 +1,15 @@
 <div class="row fragment fade-up" data-autoslide="750">
-  <h2 class="fragment highlight-green" data-autoslide="750">Proof-of-Concept</h2>
+  <h2 class="fragment highlight-green">Proof-of-Concept</h2>
 </div>
 <div class="row">
-  <div class="col align-self-center fragment fade-up" data-autoslide="750">
+  <div class="col align-self-center fragment fade-up">
     <div class="row">
-      <img class="border-frame" src="./slides/assets/50/frontend.png" />
+      <img class="border-frame" src="./slides/assets/50/backend.png" />
     </div>
   </div>
   <div class="col align-self-center fragment fade-up" data-autoslide="750">
     <div class="row">
-      <img class="border-frame" src="./slides/assets/50/backend.png" />
+      <img class="border-frame" src="./slides/assets/50/frontend.png" />
     </div>
   </div>
 </div>
@@ -19,36 +19,40 @@
 <!-- STOP THE ANIMATIONS -->
 <aside class="notes">
   <p>
-    With the proof-of-concept application, I aimed to create a blank-slate framework for mostly servers and IOT devices but like i told since it is intended to be a blank slate, it
-    can be used for anything with a dashbord like interface.
+    With the proof-of-concept application, I wanted to take this one step further, with creating a framework with dashbord like interface that can be expanded via adding more
+    microservices in the form of plugins. The idea was to create a framework that can handle authentication and basic menu design for the user interface while compatabile plugins
+    can expand the functionallity.
+  </p>
+  <!-- <p>
+    This application can be utilized on multiple cases. For example one of them being you have multiple company sites that have servers which are not accesible by internet. You can
+    host the frontend-backend part in a seperate server and just install a custom plugin that is written to monitor these servers, while no internal data is exposed. As the time
+    progresses, with another requirement arising on one of the sites, you can create a new plugin that can resolve that issue and just deploy it on that site. Or another personal
+    use case is you have some servers and IOT devices and want to manage them all in a common interface. You can create different plugins for indivual types of IOT devices and
+    servers and support these devices without being have to change the rest of the architecture.
+  </p> -->
+  <p>
+    Application consists of seperated frontend and backends both written in typescript. For frontend it utilized Next.js framework which is the server-side rendered version of
+    React and for backend it utilized Nest.js framework.
   </p>
   <p>
-    Application consists of seperated frontend and backends both written in typescript, nothing new there. For frontend it utilized Next.js framework which is the server-side
-    rendered version of React and for backend it utilized Nest.js framework.
+    As you can see in the diagram for the backend, there are three main components which are the authentication server, a gateway for all plugins and the plugins themselves. These
+    plugins do come in form of docker containers and can be enabled through making it connect to a common message queue through environment variables. Plugins get registered
+    through a internal process. After the registration all of the functionality of the plugin will be available through a common gateway. This is achieved by utilizing Apollo
+    Federation which can combine multiple GraphQL APIs toggether in a common gateway. Authentication server has a RESTFUL architecture and can also be accessed through message
+    queue for internal authentication processes for the plugins. The different approach here was rather than creating a static microservices application, creating a framework that
+    is able to handle any compatible plugins. It does not know about what plugins may or may not be installed and that is what makes it totally modular.
   </p>
   <p>
-    The idea was to create a blank slate framework, which handles authentication and basic scaffolding for the user interface but can be expanded through adding more microservices.
-    Backend services can be expanded in form of docker containers, while frontend can be expanded via plugins passed in to frontend container as environment variables to install
-    node.js modules.
-  </p>
-  <p>
-    The different approach here was rather than creating a static microservices application, creating a framework that is able to handle any compatible plugins. It does not know
-    about what plugins may or may not be installed and that is what makes it totally modular.
-  </p>
-  <p>
-    For backend plugins it has internal handling of registration and health check of the plugins. And any of these plugins can be hosted in an other local network while they only
-    need to communicate through the message queue and a internal network for apollo federation. Backend plugins utilize GraphQL since it gives enough flexibility to create modular
-    endpoint API, while some parts of it is RESTFUL like the plugin querying and authentication.
-  </p>
-  <p>
-    For frontend this was a different story. Although microfrontends is a thing at the moment, the intended result is bundle them whole together and serve them through the same
-    server. With the modular approach frontend plugins come in the way of modules where they will be installed through node package registry with passing an environment variable to
-    the frontend docker container. Although with the help of typescript which supports dynamic on demand imports which is utilized to import the plugin packages with global regex
-    patterns, the performance as disclosed in the paper itself was not up to the task and we were giving up so much to obtain this modularity.
+    As you can see in the other diagram which is for frontend, this architecture is mostly the same. While the base frontend handles basic authentication and design scaffolding
+    like creating menus and such depending on the plugins, more functionality can be installed through passing an environment variable to the frontend container in form of node
+    modules. Although microfrontends is a thing at the moment, they are intended to be bundled in to a single result. With the help of typescript which supports dynamic on demand
+    imports plugin packages with global regex patterns are imported, the performance as disclosed in the paper itself was not up to the task and we were giving up performance,
+    advantages of serverside rendered framework, and design flexibility to obtain this modularity.
   </p>
   <p>
     During this experiment, I had the chance to mock some benchmarks between monolithic and microservices for this exact application since I initially started writing this
-    application as monolithic. So the overheads and comparison with state-of-the-art previous work with utilizing benchmarks using RESTFUL and GraphQL api services, utilizing a
-    microservice architecture, message broker delays in microservices applications as well as benchmarking popular frontends which could be a candidate for this project.
+    application as monolithic. So the overheads was measured with mocking some code up and comparison with state-of-the-art previous work. These benchmarks include response times
+    of RESTFUL and GraphQL api services, comparing monolithic and microservice based application doing the same thing, message broker delays in microservices applications as well
+    as benchmarks for popular frontend framewoks.
   </p>
 </aside>

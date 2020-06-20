@@ -15,13 +15,34 @@
 <span class="fragment" data-autoslide-stop></span>
 <!-- STOP THE ANIMATIONS -->
 <aside class="notes">
-  <p>Developing a web application and working as teams are always a complicated task.</p>
-  <p>Working in teams always requires harmony and coordination, this is very eminent in any kind of programing project.</p>
+  <p>Working in teams always requires harmony and coordination.</p>
   <p>Larger teams may have friction between them since there is not only one true way of doing something while programming.</p>
-  <p>Putting this aside, it is always been a seperate task to deploy the application itself as a end product.</p>
-  <p>Thankfully while web development was advancing by itself, the tools that go along with it to ensure quality of code and deploy the application was also sharpened.</p>
-  <p>These developer operation tools enabled to automate the process of ensuring code quality and deployment.</p>
+  <p>Putting this aside, it is always been a seperate task to deploy the application itself as a end product which usually needs another team to interfere.</p>
+
+  <p>This basic workflow shows what a common develop cycle goes through these days.</p>
+  <p>The count of the developers working in the same project scales proportionally with the size of the project.</p>
+
+  <p>A distrubuted source code management system is the heart of any modern development environment.</p>
+
+  <p>After a developer is done with their part of work, they want to commit their work to the mainstream branch.</p>
   <p>
-    You can see here a basic workflow while developing a web application with the argued best practices. But scale the count of developers with the size of the project.
+    There are hooks that run on certain actions like push, where coding style or automated tests have been configured to run to ensure quality.
+  </p>
+  <p>
+    When the code is successfully pushed in to the upstream, contunious integration takes care of whether these checks of enforcing code style, automated tests, or if required
+    building or transpiling is successfully done.
+  </p>
+  <p>
+    After that if the work of the developer is finished, it can create a pull request where the source code will be combined with the initial branch it started from. This is
+    usually be subjected to manual code review by the project leads.
+  </p>
+  <p>
+    If the changes get accepted it will be merged in to the main branch, where it will trigger a different set of processes with the contunious deployment. This process enables to
+    deploy an application to a specified development stage or production environment based on certain variables.This will go through any steps required like building,
+    containizeration and even automated deployment with the help of developer operations tools.
+  </p>
+  <p>
+    So as an end result, without any human intervention except for the reviews, this automated flow enables to have a set of testing environments as well as can automatically
+    deliver a finished production version.
   </p>
 </aside>
