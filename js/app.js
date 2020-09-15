@@ -11,7 +11,8 @@ function includeHTML () {
     /* search for elements with a certain atrribute:*/
     file = elmnt.getAttribute('include-html')
     if (file) {
-      console.log(`Trying to get included file: ${file}`)
+      console.log(`Trying to get external html file: ${file}`)
+
       /* Make an HTTP request using the attribute value as the file name: */
       xhttp = new XMLHttpRequest()
       xhttp.onreadystatechange = function () {
@@ -30,7 +31,6 @@ function includeHTML () {
                 scriptElement.src = scriptElements[i].src
               }
               document.head.appendChild(scriptElement)
-              console.log(`File included: ${file}`)
             }
           }
 
@@ -53,7 +53,7 @@ function includeHTML () {
 
 includeHTML()
 
-console.log('Finished including files.')
+console.log('Finished including external html files.')
 
 // for (let i = 0; i < 5; i++) {
 //   setTimeout(includeHTML(), 100)

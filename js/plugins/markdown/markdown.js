@@ -96,7 +96,6 @@
     var notesMatch = content.split(new RegExp(options.notesSeparator, 'mgi'))
 
     if (notesMatch.length === 2) {
-      console.log(notesMatch)
       content = notesMatch[0] + '<aside class="notes">' + marked(notesMatch[1].trim()) + '</aside>'
     }
 
@@ -160,7 +159,6 @@
     for (var i = 0, len = sectionStack.length; i < len; i++) {
       // vertical
       if (sectionStack[i] instanceof Array) {
-        console.log(sectionStack[i])
         markdownSections += '<span ' + options.attributes + '>'
 
         sectionStack[i].forEach(function (child) {
@@ -226,7 +224,10 @@
         }
       })
 
-      Promise.all(externalPromises).then(resolve)
+      Promise.all(externalPromises).then(() => {
+        console.log('Finished including external markdown files.')
+        resolve()
+      })
     })
   }
 
@@ -234,6 +235,8 @@
     return new Promise(function (resolve, reject) {
       var xhr = new XMLHttpRequest()
       var url = section.getAttribute('data-markdown')
+
+      console.log(`Trying to get external markdown: ${url}`)
 
       datacharset = section.getAttribute('data-charset')
 
