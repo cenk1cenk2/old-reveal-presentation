@@ -152,17 +152,18 @@ module.exports = (grunt) => {
         tasks: 'css'
       },
       html: {
-        files: [ root.map((path) => path + '/*.html'), root.map((path) => path + '/template/*.html'), root.map((path) => path + '/slides/*.html') ]
+        files: [ './*.html', 'template/*.html', 'slides/*.html' ]
       },
       markdown: {
-        files: [ root.map((path) => path + '/slides/*.md'), root.map((path) => path + '/markdown/*.md'), root.map((path) => path + '/notes/*.md') ]
+        files: [ 'slides/*.md', 'slides/markdown/*.md', 'slides/notes/*.md' ]
       },
       assets: {
-        files: [ root.map((path) => path + '/slides/assets/**/*') ]
+        files: [ 'slides/assets/**/*' ]
       },
       options: {
         livereload: true,
-        debounceDelay: 2000
+        debounceDelay: 2000,
+        event: [ 'changed', 'added', 'deleted' ]
       }
     }
   })
