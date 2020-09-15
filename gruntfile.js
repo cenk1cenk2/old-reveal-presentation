@@ -155,7 +155,10 @@ module.exports = (grunt) => {
         files: [ root.map((path) => path + '/*.html'), root.map((path) => path + '/template/*.html'), root.map((path) => path + '/slides/*.html') ]
       },
       markdown: {
-        files: root.map((path) => path + '/slides/*.md')
+        files: [ root.map((path) => path + '/slides/*.md'), root.map((path) => path + '/markdown/*.md'), root.map((path) => path + '/notes/*.md') ]
+      },
+      assets: {
+        files: [ root.map((path) => path + '/slides/assets/**/*') ]
       },
       options: {
         livereload: true,
