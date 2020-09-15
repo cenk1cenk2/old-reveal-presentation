@@ -96,6 +96,7 @@
     var notesMatch = content.split(new RegExp(options.notesSeparator, 'mgi'))
 
     if (notesMatch.length === 2) {
+      console.log(notesMatch)
       content = notesMatch[0] + '<aside class="notes">' + marked(notesMatch[1].trim()) + '</aside>'
     }
 
@@ -103,7 +104,7 @@
     // with parsing
     content = content.replace(/<\/script>/g, SCRIPT_END_PLACEHOLDER)
 
-    return content
+    return '<script type="text/template">' + content + '</script>'
   }
 
   /**

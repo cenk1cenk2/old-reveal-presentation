@@ -141,7 +141,7 @@ module.exports = (grunt) => {
     watch: {
       js: {
         files: [ 'gruntfile.js', 'js/**/*.js', 'slides/js/**/*.js' ],
-        tasks: 'js'
+        tasks: [ 'js', 'assets' ]
       },
       scss: {
         files: [ 'css/theme/**/*.scss' ],
