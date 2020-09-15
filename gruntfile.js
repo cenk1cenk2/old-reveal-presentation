@@ -22,10 +22,7 @@ module.exports = (grunt) => {
     terser: {
       options: { ecma: 2015 },
       main: {
-        files: [
-          { src: [ 'js/lib/*.js', 'js/jquery.min.js', 'js/reveal.js', 'js/app.js' ], dest: 'dist/js/base.min.js' },
-          { src: [ 'js/include.js' ], dest: 'dist/js/include.min.js' }
-        ]
+        files: [ { src: [ 'js/lib/*.js', 'node_modules/jquery/dist/jquery.min.js', 'js/reveal.js', 'js/app.js' ], dest: 'dist/js/base.min.js' } ]
       }
     },
 

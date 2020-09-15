@@ -1,5 +1,68 @@
+function includeHTML () {
+  var z
+  var i
+  var elmnt
+  var file
+  var xhttp
+  /* Loop through a collection of all HTML elements: */
+  z = document.getElementsByTagName('*')
+  for (i = 0; i < z.length; i++) {
+    elmnt = z[i]
+    /* search for elements with a certain atrribute:*/
+    file = elmnt.getAttribute('include-html')
+    if (file) {
+      console.log(`Trying to get included file: ${file}`)
+      /* Make an HTTP request using the attribute value as the file name: */
+      xhttp = new XMLHttpRequest()
+      xhttp.onreadystatechange = function () {
+        if (this.readyState === 4) {
+          if (this.status === 200) {
+            elmnt.innerHTML = this.responseText
+
+            // add scripts to head
+            var scriptElements = elmnt.getElementsByTagName('SCRIPT')
+            for (i = 0; i < scriptElements.length; i++) {
+              var scriptElement = document.createElement('SCRIPT')
+              scriptElement.type = 'text/javascript'
+              if (!scriptElements[i].src) {
+                scriptElement.innerHTML = scriptElements[i].innerHTML
+              } else {
+                scriptElement.src = scriptElements[i].src
+              }
+              document.head.appendChild(scriptElement)
+              console.log(`File included: ${file}`)
+            }
+          }
+
+          if (this.status === 404) {
+            elmnt.innerHTML = 'Page not found. ' + file
+          }
+
+          /* Remove the attribute, and call this function once more: */
+          elmnt.removeAttribute('include-html')
+          includeHTML()
+        }
+      }
+      xhttp.open('GET', file, false)
+      xhttp.send()
+      /* Exit the function: */
+      return
+    }
+  }
+}
+
+includeHTML()
+
+console.log('Finished including files.')
+
+// for (let i = 0; i < 5; i++) {
+//   setTimeout(includeHTML(), 100)
+// }
+
 const ANIMATE_DELAY = 400
+
 $(document).ready(() => {
+  console.log('Initializing reveal.js')
   // Initialize Reveal.js
   Reveal.initialize({
     width: '1920',
@@ -19,8 +82,18 @@ $(document).ready(() => {
           return !!document.querySelector('[data-external]')
         }
       },
-      { src: 'dist/js/plugins/markdown/marked.js' },
-      { src: 'dist/js/plugins/markdown/markdown.js' },
+      {
+        src: 'dist/js/plugins/markdown/marked.js',
+        condition () {
+          return !!document.querySelector('[data-markdown]')
+        }
+      },
+      {
+        src: 'dist/js/plugins/markdown/markdown.js',
+        condition () {
+          return !!document.querySelector('[data-markdown]')
+        }
+      },
       { src: 'dist/js/plugins/notes/notes.js', async: true },
       { src: 'dist/js/plugins/zoom-js/zoom.js', async: true },
       { src: 'dist/js/plugins/highlight/highlight.js', async: true }
