@@ -10,6 +10,9 @@
   "license": "MIT",
   "repository": "https://github.com/cenk1cenk2/presentation-mti",
   "bin": "./node_modules/http-server/bin/http-server",
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">=10.0.0"
   },
@@ -21,11 +24,10 @@
     "lint": "prettier --write --loglevel warn . && yarn lint:check --fix",
     "lint:check": "eslint --ext .json,.ts,.js ."
   },
-  "dependencies": {
-    "@fontsource/open-sans": "^4.1.0",
-    "@fontsource/roboto": "^4.1.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@fontsource/open-sans": "^4.1.0",
+    "@fontsource/roboto": "^4.1.0",
     "@cenk1cenk2/cz-cc": "^1.2.2",
     "@cenk1cenk2/eslint-config": "^0.4.11",
     "commitizen": "^4.1.2",
