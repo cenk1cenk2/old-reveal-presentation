@@ -3,8 +3,10 @@ const sass = require('node-sass')
 module.exports = (grunt) => {
   require('load-grunt-tasks')(grunt)
 
-  const hostname = grunt.option('hostname') || '192.168.10.7'
+  const hostname = grunt.option('hostname') || '0.0.0.0'
   const port = grunt.option('port') || 8015
+  const target = process.env.NODE_ENV || 'development'
+  console.log(`Running for target: ${target}`)
   let root = grunt.option('root') || '.'
 
   if (!Array.isArray(root)) root = [ root ]
@@ -12,12 +14,10 @@ module.exports = (grunt) => {
   // Project configuration
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
     meta: {
       banner: '/*!\n' + ' * CENK KILIC PRESENTATION WITH REVEAL JS(<%= grunt.template.today("yyyy-mm-dd, HH:MM") %>)\n' + ' */'
     },
-
-    // uglify: {
-    // },
 
     terser: {
       options: { ecma: 2015 },
@@ -35,21 +35,21 @@ module.exports = (grunt) => {
         expand: true,
         cwd: 'css/theme/base/source',
         src: [ '*.sass', '*.scss' ],
-        dest: 'dist/css/base',
+        dest: 'dist/css/temp/base',
         ext: '.css'
       },
       extend: {
         expand: true,
         cwd: 'css/theme/extend/source',
         src: [ '*.sass', '*.scss' ],
-        dest: 'dist/css/extend',
+        dest: 'dist/css/temp/extend',
         ext: '.css'
       }
     },
 
     cssmin: {
       options: {
-        compatibility: 'ie9'
+        compatibility: 'ie11'
       },
       css: {
         files: [
@@ -58,44 +58,50 @@ module.exports = (grunt) => {
             flatten: true,
             cwd: 'css',
             src: [ '*.css', '!*.min.css' ],
-            dest: 'dist/css',
+            dest: 'dist/css/temp',
             ext: '.min.css'
-          }
-        ],
-        print: [
+          },
           {
             expand: true,
             flatten: true,
             cwd: 'css/print',
             src: [ '*.css', '!*.min.css' ],
-            dest: 'dist/css',
+            dest: 'dist/css/print',
             ext: '.min.css'
           }
         ]
       },
-      fonts: {
-        files: [
-          { src: 'fonts/hero-fontface/fonts.css', dest: 'dist/css/fonts/hero-fontface.min.css' },
-          { src: 'fonts/roboto-fontface/roboto-fontface.css', dest: 'dist/css/fonts/roboto-fontface.min.css' }
-        ]
-      },
       scss: {
         files: [
-          { src: 'dist/css/base/black.css', dest: 'dist/css/black.min.css' },
-          { src: 'dist/css/extend/extend.css', dest: 'dist/css/extend.min.css' }
+          { src: 'dist/css/temp/base/black.css', dest: 'dist/css/temp/black.min.css' },
+          { src: 'dist/css/temp/extend/extend.css', dest: 'dist/css/temp/extend.min.css' }
         ]
+      },
+      concat: {
+        files: {
+          'dist/css/base.min.css': [
+            'dist/css/temp/reset.css',
+            'dist/css/temp/bootstrap.min.css',
+            'dist/css/temp/black.min.css',
+            'dist/css/temp/extend.min.css',
+            'dist/css/temp/monokai.min.css',
+            'dist/css/temp/fonts/open-sans.min.css',
+            'dist/css/temp/fonts/roboto.min.css'
+          ]
+        }
+      }
+    },
+
+    embedFonts: {
+      all: {
+        files: {
+          'dist/css/temp/fonts/open-sans.min.css': [ 'node_modules/@fontsource/open-sans/index.css' ],
+          'dist/css/temp/fonts/roboto.min.css': [ 'node_modules/@fontsource/roboto/index.css' ]
+        }
       }
     },
 
     copy: {
-      fonts: {
-        expand: true,
-        flatten: true,
-        cwd: 'fonts',
-        src: '**',
-        dest: 'dist/css/fonts',
-        filter: 'isFile'
-      },
       images: {
         expand: true,
         flatten: true,
@@ -114,8 +120,24 @@ module.exports = (grunt) => {
       }
     },
 
+    'string-replace': {
+      dist: {
+        files: {
+          'dist/js/base.min.js': [ 'dist/js/base.min.js' ]
+        },
+        options: {
+          replacements: [
+            {
+              pattern: /\{OUTPUT_DIR\}/gi,
+              replacement: target === 'production' ? 'node_modules/@cenk1cenk2/reveal-presentation/' : ''
+            }
+          ]
+        }
+      }
+    },
+
     clean: {
-      scss: [ 'dist/css/base', 'dist/css/extend' ]
+      css: [ 'dist/css/temp' ]
     },
 
     connect: {
@@ -145,7 +167,7 @@ module.exports = (grunt) => {
       },
       scss: {
         files: [ 'css/theme/**/*.scss' ],
-        tasks: 'scss'
+        tasks: [ 'scss', 'css' ]
       },
       css: {
         files: [ 'css/**/*.css' ],
@@ -178,22 +200,24 @@ module.exports = (grunt) => {
   grunt.loadNpmTasks('grunt-terser')
   grunt.loadNpmTasks('grunt-contrib-clean')
   grunt.loadNpmTasks('grunt-contrib-copy')
+  grunt.loadNpmTasks('grunt-embed-fonts')
+  grunt.loadNpmTasks('grunt-string-replace')
 
   // Default task
-  grunt.registerTask('default', [ 'js', 'scss', 'css', 'fonts', 'assets' ])
+  grunt.registerTask('default', [ 'js', 'scss', 'css', 'assets' ])
 
   // JS task
-  grunt.registerTask('js', [ 'terser' ])
+  grunt.registerTask('js', [ 'terser', 'string-replace' ])
 
   // Fonts
-  grunt.registerTask('fonts', [ 'cssmin:fonts', 'copy:fonts' ])
+  grunt.registerTask('fonts', [ 'embedFonts' ])
 
   // Assets
   grunt.registerTask('assets', [ 'copy:images', 'copy:plugins' ])
 
   // Theme CSS
-  grunt.registerTask('scss', [ 'sass', 'cssmin:scss', 'clean:scss' ])
-  grunt.registerTask('css', [ 'cssmin:css' ])
+  grunt.registerTask('scss', [ 'sass', 'cssmin:scss' ])
+  grunt.registerTask('css', [ 'fonts', 'cssmin:css', 'cssmin:concat', 'clean:css' ])
 
   // Package presentation to archive
   grunt.registerTask('package', [ 'default', 'zip' ])

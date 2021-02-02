@@ -3,23 +3,29 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Cenk Kılıç - MTI Thesis - fullctrl</title>
-    <link rel="stylesheet" href="dist/css/reset.min.css" />
-    <link rel="stylesheet" href="dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="dist/css/black.min.css" />
-    <link rel="stylesheet" href="dist/css/extend.min.css" />
-    <link rel="stylesheet" href="dist/css/monokai.min.css" />
-    <link rel="stylesheet" href="dist/css/fonts/hero-fontface.min.css" />
-    <link rel="stylesheet" href="dist/css/fonts/roboto-fontface.min.css" />
-    <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <title>Cenk Kılıç</title>
+    <link rel="stylesheet" href="dist/css/base.min.css" />
+    <link rel="icon" type="image/x-icon" href="template/assets/favicon.png" />
   </head>
   <body>
+    <!-- Background Image Filter -->
+    <div id="backgroundImg"></div>
+    <!-- END Background Image Filter -->
+    <!-- Custom Timeline for selection slides -->
+    <div id="timeline">
+      <ul></ul>
+    </div>
+    <div id="cursorsThumbnail" onclick="Reveal.toggleOverview()"></div>
+    <div id="pointTT">
+      <p class="name"></p>
+    </div>
+    <!-- END Custom Timeline for selection slides -->
     <span include-html="template/template.html"></span>
     <!-- Javascript Sources -->
     <script defer src="dist/js/base.min.js"></script>
     <!-- END Javascript Extras -->
     <div class="reveal">
-      <div class="slides" include-html="slides/00-include.html"></div>
+      <div class="slides" include-html="slides/_include.html"></div>
     </div>
   </body>
 </html>

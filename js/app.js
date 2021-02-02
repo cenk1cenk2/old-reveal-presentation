@@ -77,26 +77,26 @@ $(document).ready(() => {
     transition: 'linear',
     dependencies: [
       {
-        src: 'dist/js/plugins/external-section/external-section.js',
+        src: '{OUTPUT_DIR}dist/js/plugins/external-section/external-section.js',
         condition () {
           return !!document.querySelector('[data-external]')
         }
       },
       {
-        src: 'dist/js/plugins/markdown/marked.js',
+        src: '{OUTPUT_DIR}dist/js/plugins/markdown/marked.js',
         condition () {
           return !!document.querySelector('[data-markdown]')
         }
       },
       {
-        src: 'dist/js/plugins/markdown/markdown.js',
+        src: '{OUTPUT_DIR}dist/js/plugins/markdown/markdown.js',
         condition () {
           return !!document.querySelector('[data-markdown]')
         }
       },
-      { src: 'dist/js/plugins/notes/notes.js', async: true },
-      { src: 'dist/js/plugins/zoom-js/zoom.js', async: true },
-      { src: 'dist/js/plugins/highlight/highlight.js', async: true }
+      { src: '{OUTPUT_DIR}dist/js/plugins/notes/notes.js', async: true },
+      { src: '{OUTPUT_DIR}dist/js/plugins/zoom-js/zoom.js', async: true },
+      { src: '{OUTPUT_DIR}dist/js/plugins/highlight/highlight.js', async: true }
     ],
     keyboard: {
       // enable auto slide with space
@@ -113,7 +113,7 @@ $(document).ready(() => {
   var link = document.createElement('link')
   link.rel = 'stylesheet'
   link.type = 'text/css'
-  link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css'
+  link.href = window.location.search.match(/print-pdf/gi) ? '{OUTPUT_DIR}dist/css/print/pdf.min.css' : '{OUTPUT_DIR}dist/css/print/paper.min.css'
   document.getElementsByTagName('head')[0].appendChild(link)
 
   // initialize events

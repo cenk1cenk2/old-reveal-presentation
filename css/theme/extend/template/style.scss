@@ -1,7 +1,7 @@
 body {
   background-color: $body-bg;
   color: #efefef;
-  font-family: 'hero_lightlight';
+  font-family: 'Open Sans';
   line-height: $text-line-height;
 }
 
@@ -106,7 +106,7 @@ div#footer {
     font-weight: 600;
     line-height: 0.3;
     strong {
-      font-family: 'heroregular';
+      font-family: 'Roboto';
     }
   }
 }
@@ -124,12 +124,14 @@ div#pointTT {
 
 div#pointTT p.name {
   font-size: 16px;
-  font-family: 'heroregular';
+  font-family: 'Open Sans';
   color: #efefef;
-  padding: 5px;
+  padding: 15px;
   background-color: #242424;
   width: 100%;
   margin-top: 0;
+  position: relative;
+  bottom: 20px;
 }
 
 div#timeline {
@@ -161,7 +163,7 @@ div#timeline ul li a:hover {
 
 div#timeline ul li span {
   font-size: 24px;
-  font-family: 'heroregular';
+  font-family: 'Open Sans';
   color: #aaaaaa;
   margin-top: 0;
   width: auto;
@@ -223,7 +225,7 @@ canvas {
   .h4,
   .h5,
   .h6 {
-    font-family: 'hero_lightlight';
+    font-family: 'Open Sans';
     font-weight: normal;
     line-height: $headings-line-height;
     text-shadow: none;
@@ -231,19 +233,19 @@ canvas {
     color: #efefef;
     margin: 5px 0 5px 0;
     strong {
-      font-family: 'heroregular';
+      font-family: 'Roboto';
     }
   }
   p,
   .p {
-    font-family: 'hero_lightlight';
+    font-family: 'Open Sans';
     font-weight: normal;
     line-height: $text-line-height;
     margin: 0 0 5px 0;
     font-size: 1.1em;
     letter-spacing: -0.1rem;
     strong {
-      font-family: 'heroregular';
+      font-family: 'Open Sans';
     }
 
     small,
