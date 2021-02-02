@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/cenk1cenk2/presentation-mti/compare/v1.0.0...v1.0.1) (2021-02-02)
+
+
+### Bug Fixes
+
+* fix private package ([2145f7d](https://github.com/cenk1cenk2/presentation-mti/commit/2145f7d5afd227e1875e626bb4fb3f2ba1386b4a))
+
 # 1.0.0 (2021-02-02)
 
 
